@@ -1,18 +1,21 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-type UserInfo = {
-  username: string;
-  bandwidthUsed: number;
-  balance: number;
-};
+let isPlanExpired = false;
 
 export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<UserInfo>
+    req: NextApiRequest,
+    res: NextApiResponse<{ username: string; bandwidthUsed: number; balance: number }>
 ) {
-  res.status(200).json({
-    username: "testUser",
-    bandwidthUsed: 104857600, // 100 MB in bytes
-    balance: 10, // in GB
-  });
+    const remainingBandwidth = isPlanExpired ? 0 : 104857600;
+
+    res.status(200).json({
+        username: "testUser",
+        bandwidthUsed: remainingBandwidth,
+        balance: isPlanExpired ? 0 : 10,
+    });
 }
+
+// Mock cron logic: Expire plan after 1 minute (simulate CRON job)
+setTimeout(() => {
+    isPlanExpired = true;
+}, 60000);
