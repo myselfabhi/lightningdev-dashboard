@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import "../styles/dashboard.css";
+
+const Sidebar = dynamic(() => import("../components/Sidebar"), { ssr: false });
 
 type UserInfo = {
     username: string;
     bandwidthUsed: number; // in bytes
-    balance: number;       // in GB
+    balance: number;       // in dollars
 };
 
 const Dashboard: React.FC = () => {
@@ -13,20 +16,123 @@ const Dashboard: React.FC = () => {
     const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
-        // Fetch User Info
+        if (typeof window === "undefined") return;
         axios
             .get<UserInfo>("/api/user-info")
             .then((response) => {
                 setUserInfo(response.data);
-                if (response.data.balance === 0) setShowToast(true); // Show toast if balance is zero
+                if (response.data.balance === 0) setShowToast(true);
             })
-            .catch((error) => console.error(error));
+            .catch((error) => console.error("Error fetching user info:", error));
     }, []);
 
+    const fetchUserInfo = () => {
+        axios
+            .get<UserInfo>("/api/user-info")
+            .then((response) => setUserInfo(response.data))
+            .catch((error) => console.error("Error fetching user info:", error));
+    };
+    
+    const usePlan = () => {
+        axios
+            .post("/api/use-plan", { usageAmount: 1 })
+            .then((response) => {
+                if (response.data.success) {
+                    console.log("Before Use Plan State:", userInfo);
+    
+                    setUserInfo((prev) => ({
+                        ...prev!,
+                        balance: response.data.balance,
+                        bandwidthUsed: response.data.bandwidthUsed,
+                    }));
+    
+                    console.log("After Use Plan State:", response.data);
+    
+                   
+                    if (response.data.balance === 0) {
+                        setShowToast(true);
+                    }
+                } else {
+                    console.log("API Error:", response.data.message);
+                    alert(response.data.message);
+                }
+            })
+            .catch((error) => {
+                if (error.response?.status === 400) {
+                    alert("Your balance is insufficient. Please renew your plan.");
+                    setShowToast(true);
+                } else {
+                    console.error("Error using plan:", error);
+                    alert("An unexpected error occurred. Please try again later.");
+                }
+            });
+    };
+    
+    
+    
+    const addBalance = () => {
+        axios
+            .post("/api/add-balance", { amount: 10 })
+            .then((response) => {
+                if (response.data.success) {
+                    console.log("Before Add Balance State:", userInfo);
+    
+                    setUserInfo((prev) => ({
+                        ...prev!,
+                        balance: response.data.newBalance,
+                    }));
+    
+                    console.log("After Add Balance State:", response.data);
+    
+                   
+                    if (response.data.newBalance > 0) {
+                        setShowToast(false);
+                    }
+                }
+            })
+            .catch((error) => console.error("Error adding balance:", error));
+    };
+    
+    
+    const renewPlan = () => {
+        axios
+            .post("/api/renew-plan")
+            .then((response) => {
+                if (response.data.success) {
+                    console.log("Before Renew Plan State:", userInfo);
+    
+                    setUserInfo({
+                        username: userInfo?.username || "User",
+                        balance: response.data.balance,
+                        bandwidthUsed: response.data.bandwidthUsed, 
+                    });
+    
+                    console.log("After Renew Plan State:", response.data);
+    
+                  
+                    setShowToast(false);
+                }
+            })
+            .catch((error) => console.error("Error renewing plan:", error));
+    };
+    
+    
+    
+    
+    
+    
+    
+    
+
+    if (!userInfo) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <div className="container-fluid dashboard-container">
-            {/* Sidebar */}
-            <div className="d-flex">
+        <div className="dashboard-container">
+            <Sidebar />
+
+            <div className="content">
                 <button
                     className="btn btn-primary d-md-none mb-3"
                     type="button"
@@ -36,80 +142,54 @@ const Dashboard: React.FC = () => {
                 >
                     Menu
                 </button>
-                <div
-                    className="offcanvas offcanvas-start"
-                    id="offcanvasSidebar"
-                    tabIndex={-1}
-                    aria-labelledby="offcanvasSidebarLabel"
-                >
-                    <div className="offcanvas-header">
-                        <h5 id="offcanvasSidebarLabel">Menu</h5>
-                        <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div className="offcanvas-body">
-                        <ul className="list-group">
-                            <li className="list-group-item">Dashboard</li>
-                            <li className="list-group-item">Purchase Plan</li>
-                            <li className="list-group-item">Invoices</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
 
-            {/* Main Content */}
-            <h1 className="dashboard-header">Welcome {userInfo?.username || "User"}</h1>
+                <h1 className="dashboard-header">Welcome {userInfo.username}</h1>
 
-            <div className="row mb-4">
-                {/* Active Balance */}
-                <div className="col-md-4">
-                    <div className="card text-center">
-                        <div className="card-body">
-                            <h5>Active Balance</h5>
-                            <p>${userInfo?.balance.toFixed(2) || "0.00"}</p>
-                            <button className="btn btn-primary">Add Balance</button>
+                <div className="row mb-4">
+                    <div className="col-md-4">
+                        <div className="card text-center">
+                            <div className="card-body">
+                                <h5>Active Balance</h5>
+                                <p>${userInfo.balance.toFixed(2)}</p>
+                                <button className="btn btn-primary" onClick={addBalance}>
+                                    Add Balance
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-4">
+                        <div className="card text-center">
+                            <div className="card-body">
+                                <h5>Data Left</h5>
+                                <p>{(userInfo.bandwidthUsed / 1e9).toFixed(2)} GB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-4">
+                        <div className="card text-center">
+                            <div className="card-body">
+                                <h5>Active Plans</h5>
+                                <p>1</p>
+                                <button className="btn btn-success" onClick={renewPlan}>
+                                    Renew Plan
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Data Left */}
-                <div className="col-md-4">
-                    <div className="card text-center">
-                        <div className="card-body">
-                            <h5>Data Left</h5>
-                            <p>{((userInfo?.bandwidthUsed || 0) / 1e9).toFixed(2)} GB</p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Active Plans */}
-                <div className="col-md-4">
-                    <div className="card text-center">
-                        <div className="card-body">
-                            <h5>Active Plans</h5>
-                            <p>{userInfo ? "1" : "0"}</p>
-                            <button className="btn btn-success">Purchase Plan</button>
-                        </div>
+                <div className="card text-center">
+                    <div className="card-body">
+                        <h5>Simulate Usage</h5>
+                        <button className="btn btn-danger" onClick={usePlan}>
+                            Use $1 of Plan
+                        </button>
                     </div>
                 </div>
             </div>
 
-            {/* Active Plan Details */}
-            <div className="card">
-                <div className="card-body">
-                    <h5>Your Active Plan</h5>
-                    <p>Plan ID: 674cb0b5f674e52455084591</p>
-                    <p>Data Left: {((userInfo?.bandwidthUsed || 0) / 1e9).toFixed(2)} GB</p>
-                    <p>Expires: Jan 1, 2025</p>
-                    <button className="btn btn-warning">Renew Plan</button>
-                </div>
-            </div>
-
-            {/* Toast Notification */}
             {showToast && (
                 <div className="toast-container position-fixed bottom-0 end-0 p-3">
                     <div className="toast show align-items-center text-bg-warning border-0">

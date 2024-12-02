@@ -13,7 +13,7 @@ export default function handler(
 
         res.status(200).json({
             success: true,
-            newBalance: gigabytes + 10, // Example: Adds gigabytes to the user's balance
+            newBalance: gigabytes + 10,
         });
     } else {
         res.status(405).json({ success: false });
