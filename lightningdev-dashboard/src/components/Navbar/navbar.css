@@ -1,0 +1,94 @@
+/* Navbar Container */
+.navbar-container {
+  background-color: #ffffff;
+  /* margin-left: 170px;
+  margin-right: 170px; */
+  /* border-bottom: 1px solid #dee2e6; */
+  font-size: 14px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  position: fixed;
+  top: 0;
+  left: 250px; /* Adjust for sidebar width */
+  right: 0;
+  z-index: 1050;
+}
+
+/* Home Icon */
+.navbar-container .home-icon i {
+  font-size: 24px;
+  color: #6c757d;
+}
+
+/* Theme Toggle */
+.navbar-container .theme-toggle .switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.navbar-container .theme-toggle .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.navbar-container .theme-toggle .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.navbar-container .theme-toggle .slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.navbar-container .theme-toggle input:checked + .slider {
+  background-color: #007bff;
+}
+
+.navbar-container .theme-toggle input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+/* Balance Section */
+.navbar-container .balance-container .btn {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+/* Date & Time */
+.navbar-container .date-time i {
+  font-size: 14px;
+  color: #007bff;
+}
+
+/* User Profile */
+.navbar-container .user-profile .btn {
+  font-size: 12px;
+  padding: 5px 15px;
+}
+
+/* Logout */
+.navbar-container .logout-icon .btn {
+  font-size: 14px;
+  padding: 5px 10px;
+}

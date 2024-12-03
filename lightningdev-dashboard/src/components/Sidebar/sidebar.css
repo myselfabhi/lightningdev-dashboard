@@ -1,0 +1,118 @@
+.sidebar-wrapper {
+    width: 250px;
+    background-color: #fff;
+    padding: 16px;
+  }
+  
+  .logo-box {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    width: 150px;
+  }
+  
+  .menu-set {
+    margin-bottom: 20px;
+  }
+  
+  .menu-heading {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #343a40;
+    cursor: pointer;
+  }
+  
+  .menu-item .menu-icon {
+    margin-right: 10px;
+    color: #6c757d;
+  }
+  
+  .menu-item:hover {
+    color: #007bff;
+  }
+  
+  .badge {
+    font-size: 10px;
+    margin-left: 5px;
+  }
+  
+  .badge-new {
+    color: #fff;
+    background-color: #007bff;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  
+  .badge-updated {
+    color: #fff;
+    background-color: #28a745;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  
+  .extension-section {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+  .extension-description {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 10px;
+  }
+  
+  .extension-btn {
+    font-size: 14px;
+  }
+  
+  .sidebar-footer {
+    text-align: center;
+  }
+  
+  .footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .footer-links a {
+    font-size: 12px;
+    color: #6c757d;
+    text-decoration: none;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .social-icons li {
+    cursor: pointer;
+    color: #6c757d;
+  }
+  
+  .social-icons li:hover {
+    color: #007bff;
+  }
+  

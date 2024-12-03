@@ -1,42 +1,75 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { state } from "./state";
+
+// Simulated state for the user plans
+export const state = {
+  userBalance: 10, // Initial balance in dollars
+  bandwidthUsed: 0, // Bandwidth used in GB
+  isPlanExpired: false,
+  plans: [
+    {
+      id: "674cb0b5f674e52455084591",
+      name: "Trial-Residential-Plan 0.15 GB",
+      dataLeft: 0.15, // in GB
+      totalData: 0.15, // in GB
+      expires: "Jan 1, 2025", // Expiry date
+    },
+  ],
+};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === "POST") {
-        if (state.isPlanExpired) {
-            return res.status(400).json({
-                success: false,
-                message: "Plan expired. Please renew your plan.",
-                balance: 0,
-                bandwidthUsed: 0,
-            });
-        }
-
-        const { usageAmount } = req.body;
-        const bandwidthConsumed = 0.01 * 1e9; // 0.01 GB
-
-        if (state.userBalance === 0) {
-            return res.status(400).json({
-                success: false,
-                message: "Insufficient balance. Please add funds or renew your plan.",
-            });
-        }
-
-        // Decrement balance and bandwidth
-        state.userBalance = Math.max(0, state.userBalance - usageAmount);
-        state.bandwidthUsed = Math.max(0, state.bandwidthUsed - bandwidthConsumed);
-
-        // Mark the plan as expired if both reach zero
-        if (state.userBalance === 0 && state.bandwidthUsed === 0) {
-            state.isPlanExpired = true;
-        }
-
-        res.status(200).json({
-            success: true,
-            balance: state.userBalance,
-            bandwidthUsed: state.bandwidthUsed,
-        });
-    } else {
-        res.status(405).json({ message: "Method Not Allowed" });
+  if (req.method === "GET") {
+    // Handle GET request to fetch plans
+    if (state.isPlanExpired) {
+      return res.status(200).json([]);
     }
+
+    return res.status(200).json(state.plans);
+  } else if (req.method === "POST") {
+    // Handle POST request to simulate plan usage
+    if (state.isPlanExpired) {
+      return res.status(400).json({
+        success: false,
+        message: "Plan expired. Please renew your plan.",
+      });
+    }
+
+    const { usageAmount } = req.body;
+
+    if (!usageAmount || usageAmount <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid usage amount.",
+      });
+    }
+
+    const plan = state.plans[0]; // Assume the user has one active plan
+    const bandwidthConsumed = 0.01; // Simulate bandwidth usage (in GB)
+
+    if (state.userBalance <= 0 || plan.dataLeft <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Insufficient balance or no data left. Please renew your plan.",
+      });
+    }
+
+    // Deduct balance and data left
+    state.userBalance = Math.max(0, state.userBalance - usageAmount);
+    plan.dataLeft = Math.max(0, plan.dataLeft - bandwidthConsumed);
+
+    // Check if the plan should be marked as expired
+    if (state.userBalance === 0 && plan.dataLeft === 0) {
+      state.isPlanExpired = true;
+    }
+
+    res.status(200).json({
+      success: true,
+      balance: state.userBalance,
+      bandwidthUsed: plan.totalData - plan.dataLeft,
+      dataLeft: plan.dataLeft,
+      totalData: plan.totalData,
+    });
+  } else {
+    // Method not allowed
+    res.status(405).json({ message: "Method Not Allowed" });
+  }
 }

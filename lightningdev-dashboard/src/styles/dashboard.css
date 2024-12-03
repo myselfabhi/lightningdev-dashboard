@@ -1,83 +1,44 @@
-/* Dashboard Header */
-.dashboard-header {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-/* Cards */
-.card {
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-/* Buttons */
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-/* Toasts */
-.toast-container {
-    z-index: 1055;
-}
-
-.toast-body {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
-    .dashboard-header {
-        font-size: 1.25rem;
-    }
-
-    .card {
-        margin-bottom: 1rem;
-    }
-}
-
-/* Sidebar Links */
-.list-group-item a {
-    text-decoration: none;
-    color: #333;
-}
-
-.list-group-item a:hover {
-    text-decoration: underline;
-}
-
-/* Offcanvas */
-.offcanvas {
-    background-color: #f8f9fa;
-}
-
-/* Persistent sidebar styling for larger screens */
-.sidebar {
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f8f9fa;
-}
-
-/* Adjust content to account for sidebar */
-.content {
-    margin-left: 250px;
+.dashboard-layout {
+    display: flex; /* Flex container for sidebar and right section */
+    min-height: 100vh; /* Full viewport height */
+    background-color: #F5F6F9; /* Light background */
+  }
+  
+  .sidebar {
+    width: 25%; /* Fixed width for the sidebar */
+    background-color: #343a40; /* Dark sidebar */
+    color: white;
     padding: 20px;
-}
-
+    min-height: 100vh; /* Full height */
+    position: sticky; /* Sticks during scroll */
+    top: 0;
+  }
+  
+  .dashboard-right-section {
+    width: 75%;
+    margin: 20px 40px;
+    display: flex;
+    flex-direction: column; /* Stack Navbar and Content vertically */
+    flex-grow: 1; /* Take up remaining space */
+  }
+  
+  .navbar-container {
+    height: 60px; /* Fixed height for Navbar */
+    background-color: #F5F6F9; /* White background for Navbar */
+    border-bottom: 1px solid #dee2e6; /* Border for separation */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 0 20px; */
+    position: sticky; /* Sticks during scroll */
+    top: 0;
+    z-index: 1000; /* Keeps it above content */
+  }
+  
+  .dashboard-content {
+    flex-grow: 1; /* Takes up the remaining vertical space */
+    padding: 20px; /* Padding for spacing */
+    background-color: #F5F6F9; /* Content background */
+    overflow-y: auto; /* Scrollable if content exceeds height */
+  }
+  

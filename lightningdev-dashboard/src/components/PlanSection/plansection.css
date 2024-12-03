@@ -1,0 +1,84 @@
+.plan-section {
+    margin-top: 10px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .section-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .gift-code-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .gift-code-input {
+    flex-grow: 1;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
+  
+  .gift-code-btn {
+    white-space: nowrap;
+  }
+  
+  .gift-help-text {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .plan-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .progress-circle-container {
+    flex-shrink: 0;
+  }
+  
+  .progress-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .plan-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .plan-description {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .plan-meta {
+    font-size: 14px;
+  }
+  
+  .btn-generate-proxy {
+    white-space: nowrap;
+  }
+  
+  .filter-btn {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
