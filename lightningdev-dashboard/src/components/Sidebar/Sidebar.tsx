@@ -68,7 +68,7 @@ const Sidebar: React.FC = () => {
             </Link>
           </li>
           <li className="menu-item">
-            <Link href="/sub-users">
+            <Link href="/sub-users-management">
               <div className="menu-link">
                 <FaUsers size={18} className="menu-icon" />
                 <span>Sub-Users</span>
