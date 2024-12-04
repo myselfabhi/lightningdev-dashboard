@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
         <h6 className="menu-heading">MAIN MENU</h6>
         <ul className="menu">
           <li className="menu-item">
-            <Link href="/dashboard">
+            <Link href="/">
               <div className="menu-link">
                 <FaHome size={18} className="menu-icon" />
                 <span>Dashboard</span>
