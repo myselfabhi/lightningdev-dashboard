@@ -1,18 +1,18 @@
 import React from "react";
 import {
-    FaHome,
-    FaCartPlus,
-    FaWallet,
-    FaFileInvoice,
-    FaServer,
-    FaUsers,
-    FaQuestionCircle,
-    FaBook,
-    FaTelegramPlane,
-    FaDiscord,
-    FaRegNewspaper,
+  FaHome,
+  FaCartPlus, FaWallet,
+  FaFileInvoice,
+  FaServer,
+  FaUsers,
+  FaQuestionCircle,
+  FaBook,
+  FaTelegramPlane,
+  FaDiscord,
+  FaRegNewspaper
 } from "react-icons/fa";
 import "./sidebar.css";
+import Link from "next/link";
 
 const Sidebar: React.FC = () => {
   return (
@@ -30,10 +30,12 @@ const Sidebar: React.FC = () => {
             <FaHome size={18} className="menu-icon" />
             <span>Dashboard</span>
           </li>
-          <li className="menu-item">
-            <FaCartPlus size={18} className="menu-icon" />
-            <span>Purchase Plan</span>
-          </li>
+          <Link href="/purchase-plan">
+  <div className="menu-item">
+    <FaCartPlus size={18} className="menu-icon" />
+    <span>Purchase Plan</span>
+  </div>
+</Link>
           <li className="menu-item">
             <FaWallet size={18} className="menu-icon" />
             <span>Deposit Balance</span>

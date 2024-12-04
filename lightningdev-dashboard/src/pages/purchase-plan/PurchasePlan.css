@@ -1,0 +1,59 @@
+.purchase-plan-page {
+    padding: 20px;
+    background-color: #f9fafe;
+  }
+  
+  .header {
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 10px;
+  }
+  
+  .header .tabs {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .header .btn {
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 6px 12px;
+  }
+  
+  .plan-card {
+    background-color: white;
+    border: 1px solid #eaecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: calc(25% - 20px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .plan-card h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .plan-card .plan-price {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #007bff;
+  }
+  
+  .plan-card .plan-details {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+  
+  .plan-card .purchase-btn {
+    width: 100%;
+    font-weight: 500;
+  }
+  
+  .plan-card .terms {
+    font-size: 0.875rem;
+    color: #6c757d;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
