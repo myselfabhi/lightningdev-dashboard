@@ -1,0 +1,21 @@
+.invoices-container {
+    margin-top: 20px;
+  }
+  
+  .invoices-controls .search-bar input {
+    width: 300px;
+  }
+  
+  .invoices-controls .filter-buttons .btn {
+    width: 100px;
+  }
+  
+  .table th,
+  .table td {
+    vertical-align: middle;
+  }
+  
+  .pagination-controls {
+    text-align: center;
+  }
+  
