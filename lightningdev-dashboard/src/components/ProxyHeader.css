@@ -1,35 +1,28 @@
-/* src/components/ProxyHeader.css */
-
 .proxy-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
     background-color: #f8f9fa;
-    border-bottom: 1px solid #ddd;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  .proxy-header .header-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+  .plan-info h4 {
+    margin-bottom: 10px;
   }
   
-  .proxy-header .header-actions {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .proxy-header .header-actions button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
+  .progress {
+    height: 10px;
+    background-color: #e9ecef;
     border-radius: 5px;
-    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: 10px;
   }
   
-  .proxy-header .header-actions button:hover {
-    background-color: #0056b3;
+  .progress-bar {
+    background-color: #007bff;
+  }
+  
+  .add-bandwidth input {
+    max-width: 80px;
   }
   

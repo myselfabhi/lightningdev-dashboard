@@ -5,14 +5,18 @@
   }
   
   .sidebar {
-    width: 25%; /* Fixed width for the sidebar */
-    background-color: #343a40; /* Dark sidebar */
-    color: white;
-    padding: 20px;
-    min-height: 100vh; /* Full height */
-    position: sticky; /* Sticks during scroll */
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 250px; /* Adjust if Sidebar width changes */
+    height: 100vh;
+    background-color: #343a40; /* Dark background */
+    color: #ffffff;
+    overflow-y: auto;
+    z-index: 1100;
+    padding-top: 60px; /* Match the height of the Navbar */
   }
+  
   
   .dashboard-right-section {
     width: 75%;
@@ -23,16 +27,17 @@
   }
   
   .navbar-container {
-    height: 60px; /* Fixed height for Navbar */
-    background-color: #F5F6F9; /* White background for Navbar */
-    border-bottom: 1px solid #dee2e6; /* Border for separation */
+    position: fixed;
+    top: 0;
+    left: 250px; /* Matches Sidebar width */
+    right: 0;
+    height: 60px; /* Ensure consistent height */
+    z-index: 1000;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dee2e6;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    /* padding: 0 20px; */
-    position: sticky; /* Sticks during scroll */
-    top: 0;
-    z-index: 1000; /* Keeps it above content */
+    padding: 0 20px;  /* Padding for spacing */
   }
   
   .dashboard-content {
