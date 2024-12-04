@@ -1,7 +1,8 @@
 import React from "react";
 import {
   FaHome,
-  FaCartPlus, FaWallet,
+  FaCartPlus,
+  FaWallet,
   FaFileInvoice,
   FaServer,
   FaUsers,
@@ -9,10 +10,10 @@ import {
   FaBook,
   FaTelegramPlane,
   FaDiscord,
-  FaRegNewspaper
+  FaRegNewspaper,
 } from "react-icons/fa";
-import "./sidebar.css";
 import Link from "next/link";
+import "./sidebar.css";
 
 const Sidebar: React.FC = () => {
   return (
@@ -26,32 +27,54 @@ const Sidebar: React.FC = () => {
       <div className="menu-set">
         <h6 className="menu-heading">MAIN MENU</h6>
         <ul className="menu">
-          <li className="menu-item active">
-            <FaHome size={18} className="menu-icon" />
-            <span>Dashboard</span>
-          </li>
-          <Link href="/purchase-plan">
-  <div className="menu-item">
-    <FaCartPlus size={18} className="menu-icon" />
-    <span>Purchase Plan</span>
-  </div>
-</Link>
           <li className="menu-item">
-            <FaWallet size={18} className="menu-icon" />
-            <span>Deposit Balance</span>
+            <Link href="/dashboard">
+              <div className="menu-link">
+                <FaHome size={18} className="menu-icon" />
+                <span>Dashboard</span>
+              </div>
+            </Link>
           </li>
           <li className="menu-item">
-            <FaFileInvoice size={18} className="menu-icon" />
-            <span>Invoices</span>
+            <Link href="/purchase-plan">
+              <div className="menu-link">
+                <FaCartPlus size={18} className="menu-icon" />
+                <span>Purchase Plan</span>
+              </div>
+            </Link>
           </li>
           <li className="menu-item">
-            <FaServer size={18} className="menu-icon" />
-            <span>Proxy Usage Log</span>
+            <Link href="/deposit-balance">
+              <div className="menu-link">
+                <FaWallet size={18} className="menu-icon" />
+                <span>Deposit Balance</span>
+              </div>
+            </Link>
           </li>
           <li className="menu-item">
-            <FaUsers size={18} className="menu-icon" />
-            <span>Sub-Users</span>
-            <span className="badge badge-new">New</span>
+            <Link href="/invoices">
+              <div className="menu-link">
+                <FaFileInvoice size={18} className="menu-icon" />
+                <span>Invoices</span>
+              </div>
+            </Link>
+          </li>
+          <li className="menu-item">
+            <Link href="/proxy-usage-log">
+              <div className="menu-link">
+                <FaServer size={18} className="menu-icon" />
+                <span>Proxy Usage Log</span>
+              </div>
+            </Link>
+          </li>
+          <li className="menu-item">
+            <Link href="/sub-users">
+              <div className="menu-link">
+                <FaUsers size={18} className="menu-icon" />
+                <span>Sub-Users</span>
+                <span className="badge badge-new">New</span>
+              </div>
+            </Link>
           </li>
         </ul>
       </div>
@@ -61,8 +84,12 @@ const Sidebar: React.FC = () => {
         <h6 className="menu-heading">REFERRALS</h6>
         <ul className="menu">
           <li className="menu-item">
-            <FaUsers size={18} className="menu-icon" />
-            <span>Referral</span>
+            <Link href="/referrals">
+              <div className="menu-link">
+                <FaUsers size={18} className="menu-icon" />
+                <span>Referral</span>
+              </div>
+            </Link>
           </li>
         </ul>
       </div>
@@ -72,13 +99,21 @@ const Sidebar: React.FC = () => {
         <h6 className="menu-heading">SUPPORT</h6>
         <ul className="menu">
           <li className="menu-item">
-            <FaQuestionCircle size={18} className="menu-icon" />
-            <span>FAQs</span>
+            <Link href="/faqs">
+              <div className="menu-link">
+                <FaQuestionCircle size={18} className="menu-icon" />
+                <span>FAQs</span>
+              </div>
+            </Link>
           </li>
           <li className="menu-item">
-            <FaBook size={18} className="menu-icon" />
-            <span>Proxy Guide</span>
-            <span className="badge badge-updated">Updated</span>
+            <Link href="/proxy-guide">
+              <div className="menu-link">
+                <FaBook size={18} className="menu-icon" />
+                <span>Proxy Guide</span>
+                <span className="badge badge-updated">Updated</span>
+              </div>
+            </Link>
           </li>
         </ul>
       </div>
@@ -88,12 +123,20 @@ const Sidebar: React.FC = () => {
         <h6 className="menu-heading">RESELLER</h6>
         <ul className="menu">
           <li className="menu-item">
-            <FaRegNewspaper size={18} className="menu-icon" />
-            <span>Dashboard</span>
+            <Link href="/reseller-dashboard">
+              <div className="menu-link">
+                <FaRegNewspaper size={18} className="menu-icon" />
+                <span>Dashboard</span>
+              </div>
+            </Link>
           </li>
           <li className="menu-item">
-            <FaRegNewspaper size={18} className="menu-icon" />
-            <span>API Docs</span>
+            <Link href="/api-docs">
+              <div className="menu-link">
+                <FaRegNewspaper size={18} className="menu-icon" />
+                <span>API Docs</span>
+              </div>
+            </Link>
           </li>
         </ul>
       </div>
@@ -103,12 +146,26 @@ const Sidebar: React.FC = () => {
         <h6 className="menu-heading">CONNECT WITH US</h6>
         <ul className="menu">
           <li className="menu-item">
-            <FaDiscord size={18} className="menu-icon" />
-            <span>Join Discord Server</span>
+            <a
+              href="https://discord.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="menu-link"
+            >
+              <FaDiscord size={18} className="menu-icon" />
+              <span>Join Discord Server</span>
+            </a>
           </li>
           <li className="menu-item">
-            <FaTelegramPlane size={18} className="menu-icon" />
-            <span>Join Telegram Channel</span>
+            <a
+              href="https://telegram.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="menu-link"
+            >
+              <FaTelegramPlane size={18} className="menu-icon" />
+              <span>Join Telegram Channel</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -121,11 +178,10 @@ const Sidebar: React.FC = () => {
           <span className="badge badge-new">NEW</span>
         </div>
         <p className="extension-description">
-          A proxy extension enhances online privacy by routing traffic through an intermediary server.
+          A proxy extension enhances online privacy by routing traffic through
+          an intermediary server.
         </p>
-        <button className="btn btn-primary extension-btn">
-          Add to Chrome
-        </button>
+        <button className="btn btn-primary extension-btn">Add to Chrome</button>
       </div>
 
       {/* Footer */}
@@ -140,10 +196,22 @@ const Sidebar: React.FC = () => {
         </ul>
         <ul className="social-icons">
           <li>
-            <FaDiscord size={20} />
+            <a
+              href="https://discord.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaDiscord size={20} />
+            </a>
           </li>
           <li>
-            <FaTelegramPlane size={20} />
+            <a
+              href="https://telegram.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTelegramPlane size={20} />
+            </a>
           </li>
         </ul>
       </div>
