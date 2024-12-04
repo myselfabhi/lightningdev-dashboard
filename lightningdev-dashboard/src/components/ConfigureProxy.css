@@ -1,0 +1,52 @@
+/* src/components/ConfigureProxy.css */
+
+.configure-proxy {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .configure-proxy h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .configure-proxy p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .configure-proxy .tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .configure-proxy .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    border: none;
+    background: none;
+    outline: none;
+    color: #555;
+  }
+  
+  .configure-proxy .tab.active {
+    font-weight: bold;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .configure-proxy .auth-form input,
+  .configure-proxy .whitelist-form input {
+    margin-bottom: 10px;
+  }
+  
+  .configure-proxy button {
+    margin-top: 10px;
+    width: 100%;
+  }
+  

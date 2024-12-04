@@ -1,0 +1,70 @@
+/* src/pages/generate-proxy/GenerateProxy.css */
+
+.generate-proxy {
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .generate-proxy .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .generate-proxy .header h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .generate-proxy .header button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .generate-proxy .header button:hover {
+    background-color: #0056b3;
+  }
+  
+  .generate-proxy .content {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .generate-proxy .left-section,
+  .generate-proxy .right-section {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+  }
+  
+  .generate-proxy .right-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .generate-proxy .chart {
+    margin-top: 20px;
+  }
+  
+  .generate-proxy button.primary {
+    margin-top: 10px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .generate-proxy button.primary:hover {
+    background-color: #0056b3;
+  }
+  

@@ -1,0 +1,64 @@
+/* src/components/ProxyDetails.css */
+
+.proxy-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .proxy-details .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .proxy-details .header h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .proxy-details .stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .proxy-details .stat-card {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    text-align: center;
+  }
+  
+  .proxy-details .stat-card h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .proxy-details .stat-card p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .proxy-details button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .proxy-details button:hover {
+    background-color: #0056b3;
+  }
+  

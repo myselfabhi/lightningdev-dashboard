@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaBook, FaFilter } from "react-icons/fa";
 import "./plansection.css";
+import { useRouter } from "next/router";
 
 type Plan = {
   id: string;
@@ -12,6 +13,7 @@ type Plan = {
 };
 
 const PlanSection: React.FC = () => {
+  const router = useRouter();
   const [plans, setPlans] = useState<Plan[]>([]);
   const [loading, setLoading] = useState<boolean>(true); // Track loading state
   const [error, setError] = useState<string | null>(null); // Track errors
@@ -33,6 +35,10 @@ const PlanSection: React.FC = () => {
 
     fetchPlans();
   }, []);
+
+  const handleGenerateProxy = (planId: string) => {
+    router.push(`/generate-proxy?planId=${planId}`);
+  };
 
   return (
     <section className="plan-section container mt-4">
@@ -100,7 +106,10 @@ const PlanSection: React.FC = () => {
                   <strong>Expires:</strong> {plan.expires}
                 </p>
               </div>
-              <button className="btn btn-outline-primary btn-generate-proxy">
+              <button
+        className="btn btn-outline-primary btn-generate-proxy"
+        onClick={() => handleGenerateProxy(plan.id)}
+      >
                 Generate Proxy →
               </button>
             </div>
