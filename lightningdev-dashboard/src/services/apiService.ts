@@ -78,6 +78,10 @@ export const addGigabytes = async (
   flow: number,
   duration: number
 ): Promise<any> => {
+  if (![1, 2].includes(flow) || duration !== 3) {
+    throw new Error("Invalid flow or duration value");
+  }
+
   try {
     const response = await axios.post(
       `${BASE_URL}/add-gigabytes-residential`,
@@ -99,6 +103,7 @@ export const addGigabytes = async (
     throw error;
   }
 };
+
 
 // Remove Gigabytes
 export const removeGigabytes = async (

@@ -1,24 +1,27 @@
 import React, { useState } from "react";
-import Layout from "../../components/Layout/Layout"; // Adjust the path if needed
+import Layout from "../../components/Layout/Layout";
 import {
   createUserResidential,
   addGigabytes,
   removeGigabytes,
-  createProxyResidential
-} from "../../services/apiService"; // Import API service
+  createProxyResidential,
+} from "../../services/apiService";
 import "./SubUsersManagement.css";
 
 const SubUsersManagement: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"Create" | "Delete" | "Manage" | null>(null);
-  const [customerName, setCustomerName] = useState<string>("");
-  const [proxyUsername, setProxyUsername] = useState<string>("");
-  const [proxyPassword, setProxyPassword] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<string | null>(null);
+  const [customerName, setCustomerName] = useState<string>(""); // Customer Name
+  const [proxyUsername, setProxyUsername] = useState<string>(""); // Proxy Username
+  const [proxyPassword, setProxyPassword] = useState<string>(""); // Proxy Password
+  const [loading, setLoading] = useState<boolean>(false); // Loading State
+  const [message, setMessage] = useState<string | null>(null); // Display Message
 
-  const [gbToAdd, setGbToAdd] = useState<number>(0);  // State to store GB to add
-  const [gbToRemove, setGbToRemove] = useState<number>(0); // State to store GB to remove
+  const [usernames, setUsernames] = useState<string[]>([]); // List of Usernames
+  const [selectedUsername, setSelectedUsername] = useState<string>(""); // Selected Username for Manage Tab
+
+  const [gbToAdd, setGbToAdd] = useState<number>(0); // GB to Add
+  const [gbToRemove, setGbToRemove] = useState<number>(0); // GB to Remove
 
   const plans = [
     { id: "plan1", name: "Trial-Residential-Plan 0.15 GB - 674cb0b5f674e52455084591" },
@@ -38,19 +41,23 @@ const SubUsersManagement: React.FC = () => {
     try {
       const email = `${proxyUsername}@lightningproxies.net`;
       const response = await createUserResidential(proxyUsername, email, proxyPassword);
-      setMessage(`User created successfully: ${response.message || response.status}`);
-      setCustomerName(""); // Reset fields
+      console.log("Create User Response:", response);
+
+      setUsernames((prev) => [...prev, proxyUsername]); // Add username to the list
+      setMessage(`User created successfully: ${proxyUsername}`);
+      setCustomerName("");
       setProxyUsername("");
       setProxyPassword("");
     } catch (error) {
+      console.error("Error creating user:", error);
       setMessage("Failed to create user. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  // Handle Create Proxy User
-  const handleCreateProxyUser = async () => {
+   // Handle Create Proxy User
+   const handleCreateProxyUser = async () => {
     if (!proxyUsername || !proxyPassword) {
       setMessage("Please fill in all required fields.");
       return;
@@ -71,8 +78,8 @@ const SubUsersManagement: React.FC = () => {
 
   // Handle Add Gigabytes
   const handleAddGigabytes = async () => {
-    if (!proxyUsername || gbToAdd <= 0) {
-      setMessage("Please provide a valid username and GB to add.");
+    if (!selectedUsername || gbToAdd <= 0) {
+      setMessage("Please select a username and provide a valid GB value to add.");
       return;
     }
 
@@ -80,11 +87,16 @@ const SubUsersManagement: React.FC = () => {
     setMessage(null);
 
     try {
-      const duration = 30; // Example: adding for 30 days (you can adjust as needed)
-      const response = await addGigabytes(proxyUsername, gbToAdd, duration);
-      setMessage(`Successfully added ${gbToAdd} GB: ${response.message || response.status}`);
-    } catch (error) {
-      setMessage("Failed to add gigabytes. Please try again.");
+      const flow = 1;
+      const duration = 3;
+
+      const response = await addGigabytes(selectedUsername, flow, duration);
+      console.log("Add Gigabytes Response:", response);
+
+      setMessage(`Successfully added ${gbToAdd} GB to ${selectedUsername}`);
+    } catch (error: any) {
+      console.error("Error in Add Gigabytes:", error);
+      setMessage(`Failed to add gigabytes: ${error.response?.data?.error || error.message}`);
     } finally {
       setLoading(false);
     }
@@ -92,8 +104,8 @@ const SubUsersManagement: React.FC = () => {
 
   // Handle Remove Gigabytes
   const handleRemoveGigabytes = async () => {
-    if (!proxyUsername || gbToRemove <= 0) {
-      setMessage("Please provide a valid username and GB to remove.");
+    if (!selectedUsername || gbToRemove <= 0) {
+      setMessage("Please select a username and provide a valid GB value to remove.");
       return;
     }
 
@@ -101,11 +113,15 @@ const SubUsersManagement: React.FC = () => {
     setMessage(null);
 
     try {
-      const duration = 30; // Example: removing for 30 days (adjust as needed)
-      const response = await removeGigabytes(proxyUsername, gbToRemove, duration);
-      setMessage(`Successfully removed ${gbToRemove} GB: ${response.message || response.status}`);
-    } catch (error) {
-      setMessage("Failed to remove gigabytes. Please try again.");
+      const duration = 3;
+
+      const response = await removeGigabytes(selectedUsername, gbToRemove, duration);
+      console.log("Remove Gigabytes Response:", response);
+
+      setMessage(`Successfully removed ${gbToRemove} GB from ${selectedUsername}`);
+    } catch (error: any) {
+      console.error("Error in Remove Gigabytes:", error);
+      setMessage(`Failed to remove gigabytes: ${error.response?.data?.error || error.message}`);
     } finally {
       setLoading(false);
     }
@@ -116,7 +132,6 @@ const SubUsersManagement: React.FC = () => {
     if (!selectedPlan) {
       return <p>Please select a plan to proceed.</p>;
     }
-
     switch (activeTab) {
       case "Create":
         return (
@@ -124,7 +139,7 @@ const SubUsersManagement: React.FC = () => {
             <h5>Create User</h5>
             {message && <p className={`message ${loading ? "loading" : ""}`}>{message}</p>}
             <div>
-              <label>Customer - Name</label>
+              <label>Customer Name</label>
               <input
                 type="text"
                 className="form-control mb-3"
@@ -188,6 +203,19 @@ const SubUsersManagement: React.FC = () => {
             <h5>Manage User</h5>
             {message && <p className={`message ${loading ? "loading" : ""}`}>{message}</p>}
             <div>
+              <label>Select Username</label>
+              <select
+                className="form-control mb-3"
+                value={selectedUsername}
+                onChange={(e) => setSelectedUsername(e.target.value)}
+              >
+                <option value="">Select a user</option>
+                {usernames.map((username) => (
+                  <option key={username} value={username}>
+                    {username}
+                  </option>
+                ))}
+              </select>
               <label>GB to Add</label>
               <input
                 type="number"
