@@ -1,7 +1,7 @@
-import InvoicesPage from "@/src/components/Pages/invoices/Invoices";
+import InvoicesPage from '@/src/components/Pages/invoices/Invoices'
 
 const Index = () => {
-  return <InvoicesPage />;
-};
+	return <InvoicesPage />
+}
 
-export default Index;
+export default Index

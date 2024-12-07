@@ -1,7 +1,7 @@
-import SubUsersManagementPage from "@/src/components/Pages/sub-users-management/SubUsersManagement";
+import SubUsersManagementPage from '@/src/components/Pages/sub-users-management/SubUsersManagement'
 
 const Index = () => {
-  return <SubUsersManagementPage />;
-};
+	return <SubUsersManagementPage />
+}
 
-export default Index;
+export default Index

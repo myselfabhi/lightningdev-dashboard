@@ -1,7 +1,7 @@
-import PurchasePlanPage from "@/src/components/Pages/purchase-plan/PurchasePlan";
+import PurchasePlanPage from '@/src/components/Pages/purchase-plan/PurchasePlan'
 
 const Index = () => {
-  return <PurchasePlanPage />;
-};
+	return <PurchasePlanPage />
+}
 
-export default Index;
+export default Index

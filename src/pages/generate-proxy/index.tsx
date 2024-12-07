@@ -1,7 +1,7 @@
-import GenerateProxyPage from "@/src/components/Pages/generate-proxy/GenerateProxy";
+import GenerateProxyPage from '@/src/components/Pages/generate-proxy/GenerateProxy'
 
 const Index = () => {
-  return <GenerateProxyPage />;
-};
+	return <GenerateProxyPage />
+}
 
-export default Index;
+export default Index

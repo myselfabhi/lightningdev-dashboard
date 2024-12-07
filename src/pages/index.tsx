@@ -1,7 +1,7 @@
-import DashboardPage from "../components/Pages/dashboard/Dashboard";
+import DashboardPage from '../components/Pages/dashboard/Dashboard'
 
 const Index = () => {
-  return <DashboardPage />;
-};
+	return <DashboardPage />
+}
 
-export default Index;
+export default Index
