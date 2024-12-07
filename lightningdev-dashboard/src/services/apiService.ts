@@ -1,8 +1,10 @@
 import axios from "axios";
-require('dotenv').config();
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
+if (!API_KEY) {
+  throw new Error("API_KEY is not defined in environment variables");
+}
 const BASE_URL = "https://developer-tester.lightningproxies.net/api";
 
 // Create User Residential
@@ -10,7 +12,7 @@ export const createUserResidential = async (
   username: string,
   email: string,
   password: string
-): Promise<any> => {
+): Promise<unknown> => {
   try {
     const response = await axios.post(
       `${BASE_URL}/create-user-residential`,
@@ -28,10 +30,12 @@ export const createUserResidential = async (
       }
     );
     return response.data;
-  } catch (error: unknown) {
-    // Check if the error is an AxiosError
+  } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error("Error creating user:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error creating user:",
+        error.response ? error.response.data : error.message
+      );
     } else {
       console.error("Unexpected error:", error);
     }
@@ -44,7 +48,7 @@ export const addGigabytes = async (
   username: string,
   flow: number,
   duration: number
-): Promise<any> => {
+): Promise<unknown> => {
   if (![1, 2].includes(flow) || duration !== 3) {
     throw new Error("Invalid flow or duration value");
   }
@@ -66,15 +70,23 @@ export const addGigabytes = async (
     );
     return response.data;
   } catch (error) {
-    console.error("Error adding gigabytes:", error);
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error adding gigabytes:",
+        error.response ? error.response.data : error.message
+      );
+    } else {
+      console.error("Unexpected error:", error);
+    }
     throw error;
   }
 };
 
-
 // Remove Gigabytes
 export const removeGigabytes = async (
-username: string, gigabytes: number): Promise<any> => {
+  username: string,
+  gigabytes: number
+): Promise<unknown> => {
   try {
     const response = await axios.post(
       `${BASE_URL}/remove-gigabytes`,
@@ -91,7 +103,14 @@ username: string, gigabytes: number): Promise<any> => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error removing gigabytes:", error);
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error removing gigabytes:",
+        error.response ? error.response.data : error.message
+      );
+    } else {
+      console.error("Unexpected error:", error);
+    }
     throw error;
   }
 };
@@ -105,7 +124,7 @@ export const proxyListCreateResidential = async (
   countryCode?: string,
   state?: string,
   city?: string
-): Promise<any> => {
+): Promise<unknown> => {
   if (type === "sticky" && (!time || time < 1 || time > 120)) {
     throw new Error("Invalid session time for 'sticky' type. Must be between 1 and 120.");
   }
@@ -131,7 +150,14 @@ export const proxyListCreateResidential = async (
     );
     return response.data;
   } catch (error) {
-    console.error("Error creating proxy list:", error);
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error creating proxy list:",
+        error.response ? error.response.data : error.message
+      );
+    } else {
+      console.error("Unexpected error:", error);
+    }
     throw error;
   }
 };
@@ -142,7 +168,7 @@ export const createProxyUserResidential = async (
   password: string,
   limitFlow: "1" | "2",
   username: string
-): Promise<any> => {
+): Promise<unknown> => {
   try {
     const response = await axios.post(
       `${BASE_URL}/create-proxy-user-residential`,
@@ -161,9 +187,14 @@ export const createProxyUserResidential = async (
     );
     return response.data;
   } catch (error) {
-    console.error("Error creating proxy user:", error);
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error creating proxy user:",
+        error.response ? error.response.data : error.message
+      );
+    } else {
+      console.error("Unexpected error:", error);
+    }
     throw error;
   }
 };
-
-

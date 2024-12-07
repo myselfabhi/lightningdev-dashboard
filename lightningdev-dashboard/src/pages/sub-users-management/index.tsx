@@ -8,22 +8,24 @@ import {
 import "./SubUsersManagement.css";
 import toast from "react-hot-toast";
 
+type Username = {
+  id: string;
+  name: string;
+  bandwidth: number;
+  bandwidthLeft: string;
+};
+
 const SubUsersManagement: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"Create" | "Delete" | "Manage" | null>(null);
-  const [customerName, setCustomerName] = useState<string>(""); 
-  const [proxyUsername, setProxyUsername] = useState<string>(""); 
-  const [proxyPassword, setProxyPassword] = useState<string>(""); 
-  const [loading, setLoading] = useState<boolean>(false); 
-  const [message] = useState<string | null>(null); 
-
-  const [usernames, setUsernames] = useState<
-    { id: string; name: string; bandwidth: number; bandwidthLeft: string }[]
-  >([]); // List of Usernames
-  const [selectedUsername, setSelectedUsername] = useState<string>(""); 
-
-  const [gbToAdd, setGbToAdd] = useState<number>(0); 
-  const [gbToRemove, setGbToRemove] = useState<number>(0); 
+  const [customerName, setCustomerName] = useState<string>("");
+  const [proxyUsername, setProxyUsername] = useState<string>("");
+  const [proxyPassword, setProxyPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [usernames, setUsernames] = useState<Username[]>([]);
+  const [selectedUsername, setSelectedUsername] = useState<string>("");
+  const [gbToAdd, setGbToAdd] = useState<number>(0);
+  const [gbToRemove, setGbToRemove] = useState<number>(0);
 
   const plans = [
     { id: "plan1", name: "Trial-Residential-Plan 0.15 GB - 674cb0b5f674e52455084591" },
@@ -53,62 +55,54 @@ const SubUsersManagement: React.FC = () => {
         },
       ]);
 
-      toast.error(`User created successfully: ${proxyUsername}`);
+      toast.success(`User created successfully: ${proxyUsername}`);
       setCustomerName("");
       setProxyUsername("");
       setProxyPassword("");
-    } catch (error) {
-      console.error("Error creating user:", error);
-      toast.error("Failed to create user. Please try again.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error creating user:", error.message);
+        toast.error("Failed to create user. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const handleGenerateRandom = () => {
-    const length = Math.floor(Math.random() * (15 - 6 + 1)) + 6; // Random length between 6 and 15
-  
+    const length = Math.floor(Math.random() * (15 - 6 + 1)) + 6;
+
     const getRandomChar = (characters: string) =>
       characters.charAt(Math.floor(Math.random() * characters.length));
-  
+
     const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const lowercase = "abcdefghijklmnopqrstuvwxyz";
     const digits = "0123456789";
     const allowedSymbols = "!@#$%^&*?_";
-  
-    // Ensure the password includes at least one character of each required type
+
     let password = "";
-    password += getRandomChar(uppercase); // At least one uppercase letter
-    password += getRandomChar(lowercase); // At least one lowercase letter
-    password += getRandomChar(digits); // At least one digit
-    password += getRandomChar(allowedSymbols); // At least one special character
-  
-    // Fill the remaining characters with a mix of all allowed characters
+    password += getRandomChar(uppercase);
+    password += getRandomChar(lowercase);
+    password += getRandomChar(digits);
+    password += getRandomChar(allowedSymbols);
+
     const allCharacters = uppercase + lowercase + digits + allowedSymbols;
     while (password.length < length) {
       password += getRandomChar(allCharacters);
     }
-  
-    // Shuffle the password to randomize character positions
+
     password = password
       .split("")
       .sort(() => Math.random() - 0.5)
       .join("");
-  
-    // Debugging logs to verify password meets criteria
-    console.log("Generated Password:", password);
-  
-    // Set the username and password in the state
-    setProxyUsername(`proxy${Math.floor(1000 + Math.random() * 9000)}`); // Random username
-    setProxyPassword(password); // Valid password
+
+    setProxyUsername(`proxy${Math.floor(1000 + Math.random() * 9000)}`);
+    setProxyPassword(password);
   };
-  
-  
-  
 
   const handleDeleteUser = (id: string) => {
     setUsernames((prev) => prev.filter((user) => user.id !== id));
-    toast.error("User deleted successfully.");
+    toast.success("User deleted successfully.");
   };
 
   const handleAddGigabytes = async () => {
@@ -118,19 +112,18 @@ const SubUsersManagement: React.FC = () => {
     }
 
     setLoading(true);
-    toast.error(null);
 
     try {
       const flow = 1;
-      const duration = 3;
-
-      const response = await addGigabytes(selectedUsername, flow, duration);
+      const response = await addGigabytes(selectedUsername, flow, gbToAdd);
       console.log("Add Gigabytes Response:", response);
 
-      toast.error(`Successfully added ${gbToAdd} GB to ${selectedUsername}`);
-    } catch (error: any) {
-      console.error("Error in Add Gigabytes:", error);
-      toast.error(`Failed to add gigabytes: ${error.response?.data?.error || error.message}`);
+      toast.success(`Successfully added ${gbToAdd} GB to ${selectedUsername}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error in Add Gigabytes:", error.message);
+        toast.error("Failed to add gigabytes.");
+      }
     } finally {
       setLoading(false);
     }
@@ -143,18 +136,17 @@ const SubUsersManagement: React.FC = () => {
     }
 
     setLoading(true);
-    toast.error(null);
 
     try {
-      const duration = 3;
-
       const response = await removeGigabytes(selectedUsername, gbToRemove);
       console.log("Remove Gigabytes Response:", response);
 
-      toast.error(`Successfully removed ${gbToRemove} GB from ${selectedUsername}`);
-    } catch (error: any) {
-      console.error("Error in Remove Gigabytes:", error);
-      toast.error(`Failed to remove gigabytes: ${error.response?.data?.error || error.message}`);
+      toast.success(`Successfully removed ${gbToRemove} GB from ${selectedUsername}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error in Remove Gigabytes:", error.message);
+        toast.error("Failed to remove gigabytes.");
+      }
     } finally {
       setLoading(false);
     }
@@ -173,7 +165,6 @@ const SubUsersManagement: React.FC = () => {
         return (
           <div className="card p-4 shadow-sm">
             <h5>Create User</h5>
-            {message && <p className={`message ${loading ? "loading" : ""}`}>{message}</p>}
             <div>
               <label>Customer Name</label>
               <input
@@ -200,10 +191,7 @@ const SubUsersManagement: React.FC = () => {
                 onChange={(e) => setProxyPassword(e.target.value)}
               />
               <div className="d-flex justify-content-between">
-                <button
-                  className="btn btn-primary mt-2"
-                  onClick={handleGenerateRandom}
-                >
+                <button className="btn btn-primary mt-2" onClick={handleGenerateRandom}>
                   Generate
                 </button>
                 <button
@@ -264,7 +252,6 @@ const SubUsersManagement: React.FC = () => {
         return (
           <div className="card p-4 shadow-sm">
             <h5>Manage User</h5>
-            {message && <p className={`message ${loading ? "loading" : ""}`}>{message}</p>}
             <div>
               <label>Select Username</label>
               <select
@@ -298,7 +285,11 @@ const SubUsersManagement: React.FC = () => {
               <button className="btn btn-primary" onClick={handleAddGigabytes} disabled={loading}>
                 {loading ? "Adding..." : "Add Gigabytes"}
               </button>
-              <button className="btn btn-danger ml-3" onClick={handleRemoveGigabytes} disabled={loading}>
+              <button
+                className="btn btn-danger ml-3"
+                onClick={handleRemoveGigabytes}
+                disabled={loading}
+              >
                 {loading ? "Removing..." : "Remove Gigabytes"}
               </button>
             </div>

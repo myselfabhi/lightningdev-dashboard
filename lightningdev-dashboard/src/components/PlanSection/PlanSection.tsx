@@ -24,7 +24,7 @@ const PlanSection: React.FC = () => {
         setLoading(true);
         const response = await axios.get<Plan[]>("/api/use-plan");
         setPlans(response.data);
-      } catch (error) {
+      } catch {
         setError("Failed to fetch plans. Please try again later.");
       } finally {
         setLoading(false);
@@ -47,12 +47,11 @@ const PlanSection: React.FC = () => {
             Generate proxies with just a click of a button
           </p>
         </div>
-
       </div>
 
       {/* Gift Code Section */}
       <div className="d-flex align-items-center justify-content-between mb-4 gift-code-wrapper">
-  {/* Left Section */}
+        {/* Left Section */}
   <div className="d-flex align-items-center">
     <input
       type="text"
