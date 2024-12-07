@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaBook, FaFilter } from "react-icons/fa";
-import "./plansection.css";
 import { useRouter } from "next/router";
+import "./PlanSection.module.css";
 
 type Plan = {
   id: string;
@@ -52,26 +52,28 @@ const PlanSection: React.FC = () => {
       {/* Gift Code Section */}
       <div className="d-flex align-items-center justify-content-between mb-4 gift-code-wrapper">
         {/* Left Section */}
-  <div className="d-flex align-items-center">
-    <input
-      type="text"
-      className="gift-code-input form-control me-2"
-      placeholder="Enter gift code"
-    />
-    <button className="btn btn-primary gift-code-btn">Get your gift 🎁</button>
-    <span className="gift-help-text ms-3">
-      How can I get a gift?{" "}
-      <a href="#" className="gift-help-link">
-        <FaBook />
-      </a>
-    </span>
-  </div>
+        <div className="d-flex align-items-center">
+          <input
+            type="text"
+            className="gift-code-input form-control me-2"
+            placeholder="Enter gift code"
+          />
+          <button className="btn btn-primary gift-code-btn">
+            Get your gift 🎁
+          </button>
+          <span className="gift-help-text ms-3">
+            How can I get a gift?{" "}
+            <a href="#" className="gift-help-link">
+              <FaBook />
+            </a>
+          </span>
+        </div>
 
-  {/* Right Section */}
-  <button className="btn btn-light filter-btn">
-    <FaFilter />
-  </button>
-</div>
+        {/* Right Section */}
+        <button className="btn btn-light filter-btn">
+          <FaFilter />
+        </button>
+      </div>
 
       {/* Display Loading, Error, or No Plans */}
       {loading && <p>Loading plans...</p>}
@@ -82,58 +84,57 @@ const PlanSection: React.FC = () => {
 
       {/* Plan Cards */}
       {plans.map((plan) => (
-  <div key={plan.id} className="plan-card mb-4">
-    <div className="d-flex align-items-center">
-      {/* Progress Circle */}
-      <div className="progress-circle-container">
-        <div className="progress-circle bg-primary text-white">
-          <strong>
-            {((plan.dataLeft / plan.totalData) * 100).toFixed(0)}%
-          </strong>
+        <div key={plan.id} className="plan-card mb-4">
+          <div className="d-flex align-items-center">
+            {/* Progress Circle */}
+            <div className="progress-circle-container">
+              <div className="progress-circle bg-primary text-white">
+                <strong>
+                  {((plan.dataLeft / plan.totalData) * 100).toFixed(0)}%
+                </strong>
+              </div>
+            </div>
+
+            {/* Plan Details */}
+            <div className="plan-details ms-3 flex-grow-1">
+              <h6 className="plan-title">{plan.name}</h6>
+              <p className="plan-description">
+                Ideal proxies for any use case & purpose. By accessing our 10M+
+                IP pool non-subnet linked, bans and blocks are non-existent.
+              </p>
+            </div>
+
+            {/* Total Data */}
+            <div className="plan-data">
+              <h6>{plan.totalData.toFixed(2)} GB</h6>
+            </div>
+          </div>
+          <hr />
+          <div className="plan-meta-container">
+            {/* Plan Meta Details */}
+            <div className="plan-meta-item">
+              <strong>Plan ID:</strong>
+              <span>{plan.id}</span>
+            </div>
+            <div className="plan-meta-item">
+              <strong>Data Left:</strong>
+              <span>
+                {plan.dataLeft.toFixed(2)} GB / {plan.totalData.toFixed(2)} GB
+              </span>
+            </div>
+            <div className="plan-meta-item">
+              <strong>Expires:</strong>
+              <span>{plan.expires}</span>
+            </div>
+            <button
+              className="btn btn-outline-primary btn-generate-proxy"
+              onClick={() => handleGenerateProxy(plan.id)}
+            >
+              Generate Proxy →
+            </button>
+          </div>
         </div>
-      </div>
-
-      {/* Plan Details */}
-      <div className="plan-details ms-3 flex-grow-1">
-        <h6 className="plan-title">{plan.name}</h6>
-        <p className="plan-description">
-          Ideal proxies for any use case & purpose. By accessing our
-          10M+ IP pool non-subnet linked, bans and blocks are non-existent.
-        </p>
-      </div>
-
-      {/* Total Data */}
-      <div className="plan-data">
-        <h6>{plan.totalData.toFixed(2)} GB</h6>
-      </div>
-    </div>
-    <hr />
-    <div className="plan-meta-container">
-      {/* Plan Meta Details */}
-      <div className="plan-meta-item">
-        <strong>Plan ID:</strong>
-        <span>{plan.id}</span>
-      </div>
-      <div className="plan-meta-item">
-        <strong>Data Left:</strong>
-        <span>
-          {plan.dataLeft.toFixed(2)} GB / {plan.totalData.toFixed(2)} GB
-        </span>
-      </div>
-      <div className="plan-meta-item">
-        <strong>Expires:</strong>
-        <span>{plan.expires}</span>
-      </div>
-      <button
-        className="btn btn-outline-primary btn-generate-proxy"
-        onClick={() => handleGenerateProxy(plan.id)}
-      >
-        Generate Proxy →
-      </button>
-    </div>
-  </div>
-))}
-
+      ))}
     </section>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import "./ProxyDetails.css";
+import "./ProxyDetails.module.css";
 
 const ProxyDetails: React.FC = () => {
   const [sessionTime, setSessionTime] = useState<number>(1); // Default session time in minutes
@@ -45,11 +45,11 @@ const ProxyDetails: React.FC = () => {
     <div className="proxy-details">
       <Toaster position="top-right" />
 
-      <h5>Proxy</h5>
+      <h5 className="heading">Proxy</h5>
       <div className="proxy-config">
         {/* Host and Port */}
         <div className="config-row">
-          <label>Host</label>
+          <label className="label">Host</label>
           <input
             type="text"
             value="resi-www.lightningproxies.net"
@@ -58,7 +58,7 @@ const ProxyDetails: React.FC = () => {
           />
         </div>
         <div className="config-row">
-          <label>Port (HTTP & SOCKS5)</label>
+          <label className="label">Port (HTTP & SOCKS5)</label>
           <input
             type="text"
             value="9999"
@@ -69,7 +69,7 @@ const ProxyDetails: React.FC = () => {
 
         {/* Rotating Proxy */}
         <div className="config-row">
-          <label>Rotating Proxy</label>
+          <label className="label">Rotating Proxy</label>
           <input
             type="text"
             value="resi-www.lightningproxies.net:9999:atjxdeqzgdlry100714-zone-resi:uepsjpxeji"
@@ -81,12 +81,14 @@ const ProxyDetails: React.FC = () => {
         {/* Sticky Sessions */}
         <div className="sticky-session-box">
           <div className="d-flex justify-content-between align-items-center">
-            <label className="sticky-session-heading">
+            <label className="sticky-session-heading label">
               Sticky Sessions (Session time: {sessionTime} min)
             </label>
             <div className="toggle-wrapper">
-              <label className="toggle-label me-2">Activate Super Sticky</label>
-              <label className="switch">
+              <label className="toggle-label me-2 label">
+                Activate Super Sticky
+              </label>
+              <label className="switch label">
                 <input
                   type="checkbox"
                   checked={isSuperSticky}
@@ -109,7 +111,9 @@ const ProxyDetails: React.FC = () => {
         {/* Proxy Format Settings */}
         <div className="proxy-format-settings">
           <div className="d-flex justify-content-between align-items-center">
-            <label className="proxy-format-heading">Proxy Format Settings:</label>
+            <label className="proxy-format-heading label">
+              Proxy Format Settings:
+            </label>
             <input
               type="number"
               value={stickyCount}
@@ -128,16 +132,22 @@ const ProxyDetails: React.FC = () => {
           rows={10}
           value={proxies.join("\n")}
           readOnly
-          placeholder="Generated proxies will appear here"
+          placeholder="Generated proxies will appear here textarea"
         />
         <div className="proxy-actions">
-          <button className="btn btn-primary" onClick={generateProxies}>
+          <button className="button btn btn-primary" onClick={generateProxies}>
             Generate Proxies
           </button>
-          <button className="btn btn-outline-primary" onClick={copyToClipboard}>
+          <button
+            className="button btn btn-outline-primary"
+            onClick={copyToClipboard}
+          >
             Copy Proxies
           </button>
-          <button className="btn btn-outline-secondary" onClick={downloadAsText}>
+          <button
+            className="button btn btn-outline-secondary"
+            onClick={downloadAsText}
+          >
             Save as .txt
           </button>
         </div>

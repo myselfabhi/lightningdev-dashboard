@@ -2,13 +2,13 @@ import React from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-import "./Layout.css"; // Optional for custom styling
+import "./DashboardLayout.module.css"; // Optional for custom styling
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="layout-container">
       {/* Sidebar */}
@@ -29,4 +29,4 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export default Layout;
+export default DashboardLayout;

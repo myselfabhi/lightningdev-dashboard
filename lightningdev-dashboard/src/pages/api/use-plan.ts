@@ -48,7 +48,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (state.userBalance <= 0 || plan.dataLeft <= 0) {
       return res.status(400).json({
         success: false,
-        message: "Insufficient balance or no data left. Please renew your plan.",
+        message:
+          "Insufficient balance or no data left. Please renew your plan.",
       });
     }
 

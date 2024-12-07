@@ -10,7 +10,7 @@ type ProxyList = {
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ProxyList>
+  res: NextApiResponse<ProxyList>,
 ) {
   res.status(200).json({
     countryCodes: ["US", "IN", "UK", "DE"],

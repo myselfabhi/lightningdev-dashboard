@@ -8,7 +8,7 @@ type ProxyResponse = {
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ProxyResponse>
+  res: NextApiResponse<ProxyResponse>,
 ) {
   if (req.method === "POST") {
     res.status(201).json({ success: true, proxyId: "proxy123" });

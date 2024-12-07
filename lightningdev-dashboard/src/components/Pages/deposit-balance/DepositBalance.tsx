@@ -1,6 +1,6 @@
 import React from "react";
-import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
-import DepositBalance from "../../components/DepositBalance/DepositBalance";
+import DashboardLayout from "../../DashboardLayout/DashboardLayout";
+import DepositBalance from "../../DepositBalance/DepositBalance";
 
 const DepositBalancePage: React.FC = () => {
   return (

@@ -11,7 +11,7 @@ const BASE_URL = "https://developer-tester.lightningproxies.net/api";
 export const createUserResidential = async (
   username: string,
   email: string,
-  password: string
+  password: string,
 ): Promise<unknown> => {
   try {
     const response = await axios.post(
@@ -27,14 +27,14 @@ export const createUserResidential = async (
           "Content-Type": "application/json",
           "api-key": API_KEY,
         },
-      }
+      },
     );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(
         "Error creating user:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
     } else {
       console.error("Unexpected error:", error);
@@ -47,7 +47,7 @@ export const createUserResidential = async (
 export const addGigabytes = async (
   username: string,
   flow: number,
-  duration: number
+  duration: number,
 ): Promise<unknown> => {
   if (![1, 2].includes(flow) || duration !== 3) {
     throw new Error("Invalid flow or duration value");
@@ -66,14 +66,14 @@ export const addGigabytes = async (
           "Content-Type": "application/json",
           "api-key": API_KEY,
         },
-      }
+      },
     );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(
         "Error adding gigabytes:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
     } else {
       console.error("Unexpected error:", error);
@@ -85,7 +85,7 @@ export const addGigabytes = async (
 // Remove Gigabytes
 export const removeGigabytes = async (
   username: string,
-  gigabytes: number
+  gigabytes: number,
 ): Promise<unknown> => {
   try {
     const response = await axios.post(
@@ -99,14 +99,14 @@ export const removeGigabytes = async (
           "Content-Type": "application/json",
           "api-key": API_KEY,
         },
-      }
+      },
     );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(
         "Error removing gigabytes:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
     } else {
       console.error("Unexpected error:", error);
@@ -123,10 +123,12 @@ export const proxyListCreateResidential = async (
   time?: number,
   countryCode?: string,
   state?: string,
-  city?: string
+  city?: string,
 ): Promise<unknown> => {
   if (type === "sticky" && (!time || time < 1 || time > 120)) {
-    throw new Error("Invalid session time for 'sticky' type. Must be between 1 and 120.");
+    throw new Error(
+      "Invalid session time for 'sticky' type. Must be between 1 and 120.",
+    );
   }
 
   try {
@@ -146,14 +148,14 @@ export const proxyListCreateResidential = async (
           "Content-Type": "application/json",
           "api-key": API_KEY,
         },
-      }
+      },
     );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(
         "Error creating proxy list:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
     } else {
       console.error("Unexpected error:", error);
@@ -167,7 +169,7 @@ export const createProxyUserResidential = async (
   account: string,
   password: string,
   limitFlow: "1" | "2",
-  username: string
+  username: string,
 ): Promise<unknown> => {
   try {
     const response = await axios.post(
@@ -183,14 +185,14 @@ export const createProxyUserResidential = async (
           "Content-Type": "application/json",
           "api-key": API_KEY,
         },
-      }
+      },
     );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(
         "Error creating proxy user:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
     } else {
       console.error("Unexpected error:", error);

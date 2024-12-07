@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router"; // Import useRouter for navigation
-import "./PlanCard.css";
+import "./PlanCard.module.css";
 
 type PlanCardProps = {
   title: string;
@@ -16,7 +16,6 @@ const PlanCard: React.FC<PlanCardProps> = ({ title, price, details }) => {
     router.push({
       pathname: "/checkout",
       query: { title, price }, // Pass plan details as query parameters
-      
     });
   };
 

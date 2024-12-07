@@ -1,5 +1,5 @@
 import React from "react";
-import "./DepositBalance.css";
+import "./DepositBalance.module.css";
 
 const DepositBalance: React.FC = () => {
   return (

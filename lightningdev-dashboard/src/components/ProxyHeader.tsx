@@ -1,7 +1,7 @@
 import React from "react";
 import { Circle } from "rc-progress";
 import { Home, Calendar, Database } from "lucide-react";
-import "./ProxyHeader.css";
+import "./ProxyHeader.module.css";
 
 type ProxyHeaderProps = {
   planId: string;
@@ -97,14 +97,14 @@ const ProxyHeader: React.FC<ProxyHeaderProps> = ({
               <p className="mb-0">Remaining Bandwidth</p>
             </div>
             <div className="add-bandwidth align-items-center">
-            <p className="mb-0">Add Bandwidth</p>
-            <input
-              type="number"
-              className="form-control add-bandwidth-input"
-              placeholder="0"
-            />
-            
-            {/* <span className="ms-2">GB</span> */}
+              <p className="mb-0">Add Bandwidth</p>
+              <input
+                type="number"
+                className="form-control add-bandwidth-input"
+                placeholder="0"
+              />
+
+              {/* <span className="ms-2">GB</span> */}
             </div>
           </div>
 
@@ -112,14 +112,15 @@ const ProxyHeader: React.FC<ProxyHeaderProps> = ({
           <div className="bandwidth-values text-end">
             <p className="mb-2">{usedBandwidth.toFixed(2)} GB</p>
             <p>{remainingBandwidth.toFixed(2)} GB</p>
-            <p><button className="btn btn-primary ms-3 add-button">Add &gt;</button></p>
+            <p>
+              <button className="btn btn-primary ms-3 add-button">
+                Add &gt;
+              </button>
+            </p>
           </div>
 
           {/* Add Bandwidth Section */}
-          <div className="add-bandwidth d-flex align-items-center ms-auto">
-
-            
-          </div>
+          <div className="add-bandwidth d-flex align-items-center ms-auto"></div>
         </div>
       </div>
     </div>

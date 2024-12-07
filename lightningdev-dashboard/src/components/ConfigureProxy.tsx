@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ConfigureProxy.css";
+import "./ConfigureProxy.module.css";
 import { proxyListCreateResidential } from "../services/apiService";
 import toast from "react-hot-toast";
 
@@ -13,7 +13,9 @@ const ConfigureProxy: React.FC = () => {
   const [state, setState] = useState<string>("Worldwide Mix");
   const [city, setCity] = useState<string>("Worldwide Mix");
   const [isp, setIsp] = useState<string>("Worldwide Mix");
-  const [mode, setMode] = useState<"CountryStateCity" | "CountryISP">("CountryStateCity");
+  const [mode, setMode] = useState<"CountryStateCity" | "CountryISP">(
+    "CountryStateCity",
+  );
   const [whitelistIp, setWhitelistIp] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -32,8 +34,12 @@ const ConfigureProxy: React.FC = () => {
         type,
         type === "sticky" ? sessionTime : undefined,
         country !== "Worldwide Mix" ? country : undefined,
-        mode === "CountryStateCity" && state !== "Worldwide Mix" ? state : undefined,
-        mode === "CountryStateCity" && city !== "Worldwide Mix" ? city : undefined
+        mode === "CountryStateCity" && state !== "Worldwide Mix"
+          ? state
+          : undefined,
+        mode === "CountryStateCity" && city !== "Worldwide Mix"
+          ? city
+          : undefined,
       );
       toast.success("Settings updated successfully!");
       console.log("Response:", response);

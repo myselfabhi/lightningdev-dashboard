@@ -24,7 +24,6 @@
 
 .menu-set {
   margin-bottom: 20px;
-
 }
 
 .menu-link {
@@ -138,7 +137,9 @@
   justify-content: center;
   gap: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .extension-btn:hover {
@@ -190,4 +191,3 @@
   padding: 5px;
   margin-left: 10px;
 }
-

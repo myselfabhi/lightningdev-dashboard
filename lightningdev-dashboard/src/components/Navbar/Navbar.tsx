@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./navbar.css";
+import "./Navbar.module.css";
 
 const Navbar: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);

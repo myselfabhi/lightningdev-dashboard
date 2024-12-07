@@ -4,12 +4,13 @@ import {
   Wallet,
   FileText,
   Server,
-  Users, Globe,
-  ChevronLeft
+  Users,
+  Globe,
+  ChevronLeft,
 } from "lucide-react";
 import Link from "next/link";
-import "./sidebar.css";
 import { useState } from "react";
+import "./Sidebar.module.css";
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -27,11 +28,11 @@ const Sidebar = () => {
           className="logo"
         />
         <button className="toggle-btn" onClick={toggleSidebar}>
-<ChevronLeft
-  size={18}
-  className={`toggle-icon ${isSidebarOpen ? "" : "rotate"}`}
-/>
-</button>
+          <ChevronLeft
+            size={18}
+            className={`toggle-icon ${isSidebarOpen ? "" : "rotate"}`}
+          />
+        </button>
       </div>
 
       {/* Main Menu */}
@@ -152,28 +153,28 @@ const Sidebar = () => {
 
       {/* LightningProxies Extension */}
       <div className="extension-section">
-  <span className="badge badge-new">NEW</span>
-  <div className="extension-header">
-    <img
-      src="https://lightningproxies.net/assets/images/logo.svg"
-      alt="LightningProxies Logo"
-      className="extension-logo"
-    />
-    <span className="extension-title">LightningProxies Extension</span>
-  </div>
-  <p className="extension-description">
-    A proxy extension enhances online privacy by routing traffic through an intermediary server.
-  </p>
-  <button className="extension-btn">
-    <img
-      src="https://lightningproxies.net/assets/images/chrome.svg"
-      alt="Chrome Icon"
-      className="chrome-icon"
-    />
-    Add to Chrome
-  </button>
-</div>
-
+        <span className="badge badge-new">NEW</span>
+        <div className="extension-header">
+          <img
+            src="https://lightningproxies.net/assets/images/logo.svg"
+            alt="LightningProxies Logo"
+            className="extension-logo"
+          />
+          <span className="extension-title">LightningProxies Extension</span>
+        </div>
+        <p className="extension-description">
+          A proxy extension enhances online privacy by routing traffic through
+          an intermediary server.
+        </p>
+        <button className="extension-btn">
+          <img
+            src="https://lightningproxies.net/assets/images/chrome.svg"
+            alt="Chrome Icon"
+            className="chrome-icon"
+          />
+          Add to Chrome
+        </button>
+      </div>
 
       {/* Footer */}
       <div className="sidebar-footer">

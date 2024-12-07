@@ -9,7 +9,7 @@ import {
   FaInfoCircle,
   FaTrash,
 } from "react-icons/fa";
-import "./cardssection.css";
+import "./CardsSection.module.css";
 
 type CardsSectionProps = {
   addBalance: () => Promise<void>;
@@ -60,10 +60,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             </div>
             <h5 className="card-title">Active Balance</h5>
             <h4 className="card-value">${balance.toFixed(2)}</h4>
-            <button
-              className="btn btn-outline-success  "
-              onClick={addBalance}
-            >
+            <button className="btn btn-outline-success  " onClick={addBalance}>
               Add Balance
             </button>
             <hr />
@@ -79,10 +76,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             </div>
             <h5 className="card-title">Active Plans</h5>
             <h4 className="card-value">{activePlans}</h4>
-            <button
-              className="btn btn-outline-primary"
-              onClick={renewPlan}
-            >
+            <button className="btn btn-outline-primary" onClick={renewPlan}>
               Purchase Plan
             </button>
             <hr />
