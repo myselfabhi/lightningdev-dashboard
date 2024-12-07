@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
+import { FaSearch } from "react-icons/fa";
 import "./Invoices.css";
 
 type Invoice = {
   id: string;
   plan: string;
-  status: string; // "Paid" or "Unpaid"
+  status: string; // "Ends in X days"
   type: string;
-  paymentStatus: string; // "Paid"
+  paymentStatus: string; // "Paid" or "Unpaid"
   amount: number;
-  bandwidth: string; // e.g., "5 GB"
-  processor: string; // e.g., "CRYPTOCURRENCY"
-  dateTime: string; // e.g., "2 Jun 2024 03:48"
+  bandwidth: string; // e.g., "0.15 GB"
 };
 
 const Invoices: React.FC = () => {
@@ -21,24 +20,20 @@ const Invoices: React.FC = () => {
   const [filter, setFilter] = useState<"All" | "Paid" | "Unpaid">("All");
 
   useEffect(() => {
-    // Simulate fetching invoices from an API
     const fetchInvoices = async () => {
-      const fetchedInvoices: Invoice[] = [
+      const mockInvoices: Invoice[] = [
         {
-          id: "672576d20a6c581e87249045",
-          plan: "Residential 5GB",
-          status: "Ends in 3 months",
+          id: "674cb0b5f674e52455084591",
+          plan: "[Trial] Trial-Residential-Plan 0.15 GB",
+          status: "Ends in 25 days",
           type: "Residential",
           paymentStatus: "Paid",
-          amount: 20.0,
-          bandwidth: "5 GB",
-          processor: "CRYPTOCURRENCY",
-          dateTime: "2 Jun 2024 03:48",
+          amount: 0.0,
+          bandwidth: "0.15 GB",
         },
-        // Add more mock invoices if needed
       ];
-      setInvoices(fetchedInvoices);
-      setFilteredInvoices(fetchedInvoices);
+      setInvoices(mockInvoices);
+      setFilteredInvoices(mockInvoices);
     };
 
     fetchInvoices();
@@ -47,18 +42,14 @@ const Invoices: React.FC = () => {
   useEffect(() => {
     let result = invoices;
 
-    // Filter by search
     if (search) {
       result = result.filter((invoice) =>
         invoice.id.toLowerCase().includes(search.toLowerCase())
       );
     }
 
-    // Filter by payment status
     if (filter !== "All") {
-      result = result.filter(
-        (invoice) => invoice.paymentStatus === filter
-      );
+      result = result.filter((invoice) => invoice.paymentStatus === filter);
     }
 
     setFilteredInvoices(result);
@@ -66,44 +57,53 @@ const Invoices: React.FC = () => {
 
   return (
     <Layout>
-      <div className="invoices-container container">
-        <h4>Your Invoices</h4>
-        <p>Detailed list of all your invoices</p>
+      <div className="invoices-container">
+        <div className="header d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h4>Your Invoices</h4>
+            <p className="text-muted">Detailed list of all your invoices</p>
+          </div>
+          <a href="/support" className="btn btn-primary">
+            Contact Us
+          </a>
+        </div>
 
         {/* Search and Filter Section */}
-        <div className="invoices-controls d-flex justify-content-between align-items-center mb-3">
-          <div className="search-bar">
+        <div className="controls bg-white p-3 d-flex justify-content-between align-items-center">
+          <div className="search-bar d-flex align-items-center">
+            <FaSearch className="me-2 text-muted" />
             <input
               type="text"
               className="form-control"
-              placeholder="Search by Invoice ID"
+              placeholder="Search your invoices"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <div className="filter-buttons">
+          <div className="filter-buttons d-flex align-items-center">
+            <span className="sort-label me-2">Sort by Payment:</span>
             <button
-              className={`btn btn-outline-danger me-2 ${
-                filter === "Unpaid" ? "active" : ""
+              className={`chip-btn chip-red me-2 ${
+                filter === "Unpaid" ? "chip-active" : ""
               }`}
               onClick={() => setFilter("Unpaid")}
             >
-              Unpaid
+              .Unpaid
             </button>
             <button
-              className={`btn btn-outline-success ${
-                filter === "Paid" ? "active" : ""
+              className={`chip-btn chip-green ${
+                filter === "Paid" ? "chip-active" : ""
               }`}
               onClick={() => setFilter("Paid")}
             >
-              Paid
+             . Paid
             </button>
           </div>
         </div>
 
         {/* Invoices Table */}
-        <div className="table-responsive">
-          <table className="table table-striped">
+        <div className="table-container bg-white mt-3 p-3 rounded">
+          <table className="table">
             <thead>
               <tr>
                 <th>Invoice ID</th>
@@ -113,9 +113,6 @@ const Invoices: React.FC = () => {
                 <th>Payment Status</th>
                 <th>Amount</th>
                 <th>Bandwidth</th>
-                <th>Processor</th>
-                <th>Date & Time</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -125,15 +122,15 @@ const Invoices: React.FC = () => {
                     <td>{invoice.id}</td>
                     <td>{invoice.plan}</td>
                     <td>
-                      <span className="badge bg-primary">{invoice.status}</span>
+                      <span className="chip chip-primary">{invoice.status}</span>
                     </td>
                     <td>{invoice.type}</td>
                     <td>
                       <span
-                        className={`badge ${
+                        className={`chip ${
                           invoice.paymentStatus === "Paid"
-                            ? "bg-success"
-                            : "bg-danger"
+                            ? "chip-success"
+                            : "chip-danger"
                         }`}
                       >
                         {invoice.paymentStatus}
@@ -141,29 +138,17 @@ const Invoices: React.FC = () => {
                     </td>
                     <td>${invoice.amount.toFixed(2)}</td>
                     <td>{invoice.bandwidth}</td>
-                    <td>{invoice.processor}</td>
-                    <td>{invoice.dateTime}</td>
-                    <td>
-                      <button className="btn btn-link">View &gt;</button>
-                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={10} className="text-center">
+                  <td colSpan={7} className="text-center">
                     No invoices found.
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
-        </div>
-
-        {/* Pagination Placeholder */}
-        <div className="pagination-controls d-flex justify-content-between align-items-center mt-4">
-          <button className="btn btn-link">&laquo; Prev</button>
-          <span>Page 1 of 97</span>
-          <button className="btn btn-link">Next &raquo;</button>
         </div>
       </div>
     </Layout>
