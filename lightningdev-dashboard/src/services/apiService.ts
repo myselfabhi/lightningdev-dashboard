@@ -37,41 +37,6 @@ export const createUserResidential = async (
   }
 };
 
-
-// Create Proxy Residential User
-export const createProxyResidential = async (
-  account: string,
-  password: string,
-  country: string,
-  state: string,
-  city: string
-): Promise<any> => {
-  try {
-    const response = await axios.post(
-      `${BASE_URL}/proxy-list-create-residential`,
-      {
-        account,
-        password,
-        type: "sticky", // Assuming "sticky" as default proxy type
-        time: 60,       // Optional, set a default session time
-        country_code: country || undefined,
-        state: state || undefined,
-        city: city || undefined,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": API_KEY,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error creating proxy residential:", error);
-    throw error;
-  }
-};
-
 // Add Gigabytes
 export const addGigabytes = async (
   username: string,
@@ -128,4 +93,75 @@ username: string, gigabytes: number, duration: number): Promise<any> => {
     throw error;
   }
 };
+
+// Proxy List Create Residential
+export const proxyListCreateResidential = async (
+  account: string,
+  password: string,
+  type: "rotating" | "sticky",
+  time?: number,
+  countryCode?: string,
+  state?: string,
+  city?: string
+): Promise<any> => {
+  if (type === "sticky" && (!time || time < 1 || time > 120)) {
+    throw new Error("Invalid session time for 'sticky' type. Must be between 1 and 120.");
+  }
+
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/proxy-list-create-residential`,
+      {
+        account,
+        password,
+        type,
+        ...(type === "sticky" && { time }),
+        ...(countryCode && { country_code: countryCode }),
+        ...(state && { state }),
+        ...(city && { city }),
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": API_KEY,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error creating proxy list:", error);
+    throw error;
+  }
+};
+
+// Create Proxy User Residential
+export const createProxyUserResidential = async (
+  account: string,
+  password: string,
+  limitFlow: "1" | "2",
+  username: string
+): Promise<any> => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/create-proxy-user-residential`,
+      {
+        account,
+        password,
+        limit_flow: limitFlow,
+        username,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": API_KEY,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error creating proxy user:", error);
+    throw error;
+  }
+};
+
 
