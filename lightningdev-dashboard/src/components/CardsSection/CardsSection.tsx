@@ -34,6 +34,9 @@ const CardsSection: React.FC<CardsSectionProps> = ({
   username,
   userId,
 }) => {
+  const dataLeftPercentage =
+    totalDataPurchased > 0 ? ((dataLeft / totalDataPurchased) * 100).toFixed(0) : "0";
+
   return (
     <div className="container cards-section">
       {/* Welcome Section */}
@@ -59,7 +62,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             <h5 className="card-title">Active Balance</h5>
             <h4 className="card-value">${balance.toFixed(2)}</h4>
             <button
-              className="btn btn-outline-success"
+              className="btn btn-outline-success  "
               onClick={addBalance}
             >
               Add Balance
@@ -78,7 +81,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             <h5 className="card-title">Active Plans</h5>
             <h4 className="card-value">{activePlans}</h4>
             <button
-              className="btn btn-outline-primary mt-2 float-end"
+              className="btn btn-outline-primary"
               onClick={renewPlan}
             >
               Purchase Plan
@@ -97,12 +100,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             <h5 className="card-title">Data Left</h5>
             <h4 className="card-value">{dataLeft.toFixed(2)} GB</h4>
             <div className="progress-circle mt-2">
-              <strong>
-                {totalDataPurchased > 0
-                  ? ((dataLeft / totalDataPurchased) * 100).toFixed(0)
-                  : "0"}
-                %
-              </strong>
+              <strong>{dataLeftPercentage}%</strong>
             </div>
             <hr />
             <p className="text-muted">
@@ -114,16 +112,16 @@ const CardsSection: React.FC<CardsSectionProps> = ({
         {/* User Profile */}
         <div className="col-12 col-md-6 col-lg-6">
           <div className="card custom-card text-center">
-            <div className="icon-style">
+            <div className="icon-style-4">
               <FaUser />
             </div>
             <h5 className="card-title">{username}</h5>
             <p className="text-muted">{userId}</p>
-            <div className="d-flex justify-content-center gap-2 mt-3">
-              <button className="btn btn-outline-success" title="Shield">
+            <div className="d-flex justify-content-center gap-3 mt-6">
+              <button className="btn btn-outline-success-icon" title="Shield">
                 <FaShieldAlt />
               </button>
-              <button className="btn btn-outline-primary" title="Email">
+              <button className="btn btn-outline-primary-icon" title="Email">
                 <FaEnvelope />
               </button>
               <button className="btn btn-outline-secondary" title="Info">
