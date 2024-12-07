@@ -28,7 +28,7 @@
   
   
   .dashboard-content {
-    flex-grow: 1; /* Takes up the remaining vertical space */
+    margin-top: 50px;
     padding: 20px; /* Padding for spacing */
     background-color: #F5F6F9; /* Content background */
     overflow-y: auto; /* Scrollable if content exceeds height */

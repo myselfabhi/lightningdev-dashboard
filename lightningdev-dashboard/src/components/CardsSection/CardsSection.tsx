@@ -36,7 +36,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
 }) => {
   return (
     <div className="container cards-section">
-      {/* Top Section */}
+      {/* Welcome Section */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h4 className="mb-1">Welcome {username}</h4>
@@ -44,7 +44,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
         </div>
         <button className="btn btn-light shadow-sm read-more-btn">
           <FaShieldAlt className="me-2" /> Residential State/City Targeting{" "}
-          <span className="text-primary">Read More &gt;</span>
+          <span>Read More &gt;</span>
         </button>
       </div>
 
@@ -56,10 +56,10 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             <div className="icon-style">
               <FaDollarSign />
             </div>
-            <h5>Active Balance</h5>
+            <h5 className="card-title">Active Balance</h5>
             <h4 className="card-value">${balance.toFixed(2)}</h4>
             <button
-              className="btn btn-outline-success mt-2 float-end"
+              className="btn btn-outline-success"
               onClick={addBalance}
             >
               Add Balance
@@ -75,13 +75,13 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             <div className="icon-style">
               <FaShoppingCart />
             </div>
-            <h5>Active Plans</h5>
+            <h5 className="card-title">Active Plans</h5>
             <h4 className="card-value">{activePlans}</h4>
             <button
               className="btn btn-outline-primary mt-2 float-end"
               onClick={renewPlan}
             >
-              Renew Plan
+              Purchase Plan
             </button>
             <hr />
             <p className="text-muted">Total Purchased Plans: {activePlans}</p>
@@ -94,7 +94,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             <div className="icon-style">
               <FaServer />
             </div>
-            <h5>Data Left</h5>
+            <h5 className="card-title">Data Left</h5>
             <h4 className="card-value">{dataLeft.toFixed(2)} GB</h4>
             <div className="progress-circle mt-2">
               <strong>
@@ -113,11 +113,11 @@ const CardsSection: React.FC<CardsSectionProps> = ({
 
         {/* User Profile */}
         <div className="col-12 col-md-6 col-lg-6">
-          <div className="card custom-card text-start">
+          <div className="card custom-card text-center">
             <div className="icon-style">
               <FaUser />
             </div>
-            <h5>{username}</h5>
+            <h5 className="card-title">{username}</h5>
             <p className="text-muted">{userId}</p>
             <div className="d-flex justify-content-center gap-2 mt-3">
               <button className="btn btn-outline-success" title="Shield">
