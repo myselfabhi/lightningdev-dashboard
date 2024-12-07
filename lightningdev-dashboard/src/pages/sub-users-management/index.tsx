@@ -3,32 +3,30 @@ import Layout from "../../components/Layout/Layout";
 import {
   createUserResidential,
   addGigabytes,
-  removeGigabytes,
-  createProxyResidential,
+  removeGigabytes
 } from "../../services/apiService";
 import "./SubUsersManagement.css";
 
 const SubUsersManagement: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"Create" | "Delete" | "Manage" | null>(null);
-  const [customerName, setCustomerName] = useState<string>(""); // Customer Name
-  const [proxyUsername, setProxyUsername] = useState<string>(""); // Proxy Username
-  const [proxyPassword, setProxyPassword] = useState<string>(""); // Proxy Password
-  const [loading, setLoading] = useState<boolean>(false); // Loading State
-  const [message, setMessage] = useState<string | null>(null); // Display Message
+  const [customerName, setCustomerName] = useState<string>(""); 
+  const [proxyUsername, setProxyUsername] = useState<string>(""); 
+  const [proxyPassword, setProxyPassword] = useState<string>(""); 
+  const [loading, setLoading] = useState<boolean>(false); 
+  const [message, setMessage] = useState<string | null>(null); 
 
-  const [usernames, setUsernames] = useState<string[]>([]); // List of Usernames
-  const [selectedUsername, setSelectedUsername] = useState<string>(""); // Selected Username for Manage Tab
+  const [usernames, setUsernames] = useState<string[]>([]); 
+  const [selectedUsername, setSelectedUsername] = useState<string>(""); 
 
-  const [gbToAdd, setGbToAdd] = useState<number>(0); // GB to Add
-  const [gbToRemove, setGbToRemove] = useState<number>(0); // GB to Remove
+  const [gbToAdd, setGbToAdd] = useState<number>(0); 
+  const [gbToRemove, setGbToRemove] = useState<number>(0); 
 
   const plans = [
     { id: "plan1", name: "Trial-Residential-Plan 0.15 GB - 674cb0b5f674e52455084591" },
     { id: "plan2", name: "Premium-Residential-Plan 1 GB - 8723409f674e52455083445" },
   ];
 
-  // Handle Create User
   const handleCreateUser = async () => {
     if (!proxyUsername || !proxyPassword || !customerName) {
       setMessage("Please fill in all required fields.");
@@ -43,7 +41,7 @@ const SubUsersManagement: React.FC = () => {
       const response = await createUserResidential(proxyUsername, email, proxyPassword);
       console.log("Create User Response:", response);
 
-      setUsernames((prev) => [...prev, proxyUsername]); // Add username to the list
+      setUsernames((prev) => [...prev, proxyUsername]);
       setMessage(`User created successfully: ${proxyUsername}`);
       setCustomerName("");
       setProxyUsername("");
@@ -56,27 +54,6 @@ const SubUsersManagement: React.FC = () => {
     }
   };
 
-   // Handle Create Proxy User
-   const handleCreateProxyUser = async () => {
-    if (!proxyUsername || !proxyPassword) {
-      setMessage("Please fill in all required fields.");
-      return;
-    }
-
-    setLoading(true);
-    setMessage(null);
-
-    try {
-      const response = await createProxyResidential(proxyUsername, proxyPassword, "US", "California", "Los Angeles");
-      setMessage(`Proxy user created successfully: ${response.message || response.status}`);
-    } catch (error) {
-      setMessage("Failed to create proxy user. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Handle Add Gigabytes
   const handleAddGigabytes = async () => {
     if (!selectedUsername || gbToAdd <= 0) {
       setMessage("Please select a username and provide a valid GB value to add.");
@@ -102,7 +79,6 @@ const SubUsersManagement: React.FC = () => {
     }
   };
 
-  // Handle Remove Gigabytes
   const handleRemoveGigabytes = async () => {
     if (!selectedUsername || gbToRemove <= 0) {
       setMessage("Please select a username and provide a valid GB value to remove.");
@@ -127,15 +103,18 @@ const SubUsersManagement: React.FC = () => {
     }
   };
 
-  // Render Content for Tabs
   const renderContent = () => {
     if (!selectedPlan) {
-      return <p>Please select a plan to proceed.</p>;
+      return (
+        <div className="card p-4 shadow-sm">
+          <p>Please select a plan to proceed.</p>
+        </div>
+      );
     }
     switch (activeTab) {
       case "Create":
         return (
-          <div className="create-user">
+          <div className="card p-4 shadow-sm">
             <h5>Create User</h5>
             {message && <p className={`message ${loading ? "loading" : ""}`}>{message}</p>}
             <div>
@@ -171,9 +150,9 @@ const SubUsersManagement: React.FC = () => {
         );
       case "Delete":
         return (
-          <div className="delete-user">
+          <div className="card p-4 shadow-sm">
             <h5>Delete User</h5>
-            <table className="table">
+            <table className="table table-striped">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -199,7 +178,7 @@ const SubUsersManagement: React.FC = () => {
         );
       case "Manage":
         return (
-          <div className="manage-user">
+          <div className="card p-4 shadow-sm">
             <h5>Manage User</h5>
             {message && <p className={`message ${loading ? "loading" : ""}`}>{message}</p>}
             <div>
@@ -249,32 +228,51 @@ const SubUsersManagement: React.FC = () => {
   return (
     <Layout>
       <div className="container">
-        <div className="header">
-          <h1>Manage Sub-Users</h1>
+        <div className="header mb-4">
+          <h5>Sub-users management</h5>
+          <p>Empower your team's efficiency with seamless sub-user management.</p>
         </div>
 
-        <div className="plans">
-          <h5>Select Plan</h5>
-          {plans.map((plan) => (
-            <button
-              key={plan.id}
-              className={`btn ${selectedPlan === plan.id ? "btn-primary" : "btn-outline-primary"}`}
-              onClick={() => setSelectedPlan(plan.id)}
+        <div className="card p-4 shadow-sm">
+          <div className="mb-3">
+            <select
+              className="form-select"
+              onChange={(e) => setSelectedPlan(e.target.value)}
             >
-              {plan.name}
-            </button>
-          ))}
+              <option value="">Select a plan</option>
+              {plans.map((plan) => (
+                <option key={plan.id} value={plan.id}>
+                  {plan.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="accordion-container">
+  <div className="tabs">
+    <button
+      className={`btn ${activeTab === "Create" ? "active" : ""}`}
+      onClick={() => setActiveTab("Create")}
+    >
+      Create User
+    </button>
+    <button
+      className={`btn ${activeTab === "Delete" ? "active" : ""}`}
+      onClick={() => setActiveTab("Delete")}
+    >
+      Delete User
+    </button>
+    <button
+      className={`btn ${activeTab === "Manage" ? "active" : ""}`}
+      onClick={() => setActiveTab("Manage")}
+    >
+      Manage User
+    </button>
+  </div>
+</div>
+
         </div>
 
-        {selectedPlan && (
-          <div className="tabs">
-            <button onClick={() => setActiveTab("Create")}>Create User</button>
-            <button onClick={() => setActiveTab("Delete")}>Delete User</button>
-            <button onClick={() => setActiveTab("Manage")}>Manage User</button>
-          </div>
-        )}
-
-        {renderContent()}
+        <div className="mt-4">{renderContent()}</div>
       </div>
     </Layout>
   );
