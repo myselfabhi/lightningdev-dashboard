@@ -15,19 +15,17 @@ type Plan = {
 const PlanSection: React.FC = () => {
   const router = useRouter();
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // Track loading state
-  const [error, setError] = useState<string | null>(null); // Track errors
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPlans = async () => {
       try {
         setLoading(true);
-        const response = await axios.get<Plan[]>("/api/use-plan"); // Fetch plans from the API
-        console.log("Fetched Plans:", response.data); // Debugging log
+        const response = await axios.get<Plan[]>("/api/use-plan");
         setPlans(response.data);
       } catch (err) {
-        console.error("Error fetching plans:", err);
-        setError("Failed to fetch plans. Please try again later."); // Set error message
+        setError("Failed to fetch plans. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -41,7 +39,7 @@ const PlanSection: React.FC = () => {
   };
 
   return (
-    <section className="plan-section container mt-4">
+    <section className="plan-section container">
       <div className="d-flex align-items-center justify-content-between">
         <div>
           <h5 className="section-title">Your Active Plans</h5>
@@ -49,26 +47,32 @@ const PlanSection: React.FC = () => {
             Generate proxies with just a click of a button
           </p>
         </div>
-        <button className="btn btn-light filter-btn">
-          <FaFilter /> Filter
-        </button>
+
       </div>
 
       {/* Gift Code Section */}
-      <div className="gift-code-container d-flex align-items-center mb-4">
-        <input
-          type="text"
-          className="gift-code-input form-control me-2"
-          placeholder="Enter gift code"
-        />
-        <button className="btn btn-primary gift-code-btn">Get your gift 🎁</button>
-        <span className="gift-help-text ms-3">
-          How can I get a gift?{" "}
-          <a href="#" className="gift-help-link text-decoration-underline">
-            <FaBook />
-          </a>
-        </span>
-      </div>
+      <div className="d-flex align-items-center justify-content-between mb-4 gift-code-wrapper">
+  {/* Left Section */}
+  <div className="d-flex align-items-center">
+    <input
+      type="text"
+      className="gift-code-input form-control me-2"
+      placeholder="Enter gift code"
+    />
+    <button className="btn btn-primary gift-code-btn">Get your gift 🎁</button>
+    <span className="gift-help-text ms-3">
+      How can I get a gift?{" "}
+      <a href="#" className="gift-help-link">
+        <FaBook />
+      </a>
+    </span>
+  </div>
+
+  {/* Right Section */}
+  <button className="btn btn-light filter-btn">
+    <FaFilter />
+  </button>
+</div>
 
       {/* Display Loading, Error, or No Plans */}
       {loading && <p>Loading plans...</p>}
@@ -79,43 +83,58 @@ const PlanSection: React.FC = () => {
 
       {/* Plan Cards */}
       {plans.map((plan) => (
-        <div key={plan.id} className="plan-card d-flex align-items-center mb-4">
-          <div className="progress-circle-container">
-            <div className="progress-circle bg-primary text-white">
-              <strong>
-                {((plan.dataLeft / plan.totalData) * 100).toFixed(0)}%
-              </strong>
-            </div>
-          </div>
-          <div className="plan-details ms-3 flex-grow-1">
-            <h6 className="plan-title">{plan.name}</h6>
-            <p className="plan-description">
-              Ideal proxies for any use case & purpose. By accessing our
-              10M+ IP pool non-subnet linked, bans and blocks are non-existent.
-            </p>
-            <div className="d-flex justify-content-between align-items-center mt-3">
-              <div>
-                <p className="plan-meta">
-                  <strong>Plan ID:</strong> {plan.id}
-                </p>
-                <p className="plan-meta">
-                  <strong>Data Left:</strong>{" "}
-                  {plan.dataLeft.toFixed(2)} GB / {plan.totalData.toFixed(2)} GB
-                </p>
-                <p className="plan-meta">
-                  <strong>Expires:</strong> {plan.expires}
-                </p>
-              </div>
-              <button
+  <div key={plan.id} className="plan-card mb-4">
+    <div className="d-flex align-items-center">
+      {/* Progress Circle */}
+      <div className="progress-circle-container">
+        <div className="progress-circle bg-primary text-white">
+          <strong>
+            {((plan.dataLeft / plan.totalData) * 100).toFixed(0)}%
+          </strong>
+        </div>
+      </div>
+
+      {/* Plan Details */}
+      <div className="plan-details ms-3 flex-grow-1">
+        <h6 className="plan-title">{plan.name}</h6>
+        <p className="plan-description">
+          Ideal proxies for any use case & purpose. By accessing our
+          10M+ IP pool non-subnet linked, bans and blocks are non-existent.
+        </p>
+      </div>
+
+      {/* Total Data */}
+      <div className="plan-data">
+        <h6>{plan.totalData.toFixed(2)} GB</h6>
+      </div>
+    </div>
+    <hr />
+    <div className="plan-meta-container">
+      {/* Plan Meta Details */}
+      <div className="plan-meta-item">
+        <strong>Plan ID:</strong>
+        <span>{plan.id}</span>
+      </div>
+      <div className="plan-meta-item">
+        <strong>Data Left:</strong>
+        <span>
+          {plan.dataLeft.toFixed(2)} GB / {plan.totalData.toFixed(2)} GB
+        </span>
+      </div>
+      <div className="plan-meta-item">
+        <strong>Expires:</strong>
+        <span>{plan.expires}</span>
+      </div>
+      <button
         className="btn btn-outline-primary btn-generate-proxy"
         onClick={() => handleGenerateProxy(plan.id)}
       >
-                Generate Proxy →
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
+        Generate Proxy →
+      </button>
+    </div>
+  </div>
+))}
+
     </section>
   );
 };
