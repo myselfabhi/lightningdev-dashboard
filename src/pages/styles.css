@@ -152,7 +152,7 @@
 .layout-container {
 	display: flex;
 	min-height: 100vh;
-	background-color: #f8f9fa; /* Light gray background */
+	background-color: #f8f9fa; 
 }
 
 .main-content-wrapper {
@@ -951,161 +951,97 @@
 	margin-right: 20px;
 }
 
-.plan-section {
-	margin-top: 20px;
-}
-
-.section-title {
-	margin-top: 30px;
-	font-size: 20px;
-	font-weight: bold;
-	color: #333333;
-}
-
-.section-subtitle {
-	font-size: 14px;
-	color: #6c757d;
-}
-
-.gift-code-container {
-	display: flex;
-	align-items: left;
-	background: #f8f9fa;
-	padding: 10px;
-	border-radius: 10px;
-}
-
-.filter-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: #fff;
-	border: 1px solid #ced4da;
-	padding: 10px 15px;
-	border-radius: 6px;
-}
-
-.plan-card {
+.plan-bg{
 	background-color: #fff;
+	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	padding: 20px;
 }
 
-.progress-circle-container {
-	flex-shrink: 0;
-}
+.plan-section {
+    margin-top: 10px;
+  }
 
-.progress-circle {
-	width: 60px;
-	height: 60px;
-	border-radius: 50%;
-	background-color: #1a73e8;
-	color: #fff;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 16px;
-	font-weight: bold;
-}
-
-.plan-title {
-	font-size: 16px;
-	font-weight: bold;
-	color: #333333;
-}
-
-.plan-description {
-	font-size: 14px;
-	color: #6c757d;
-	margin-top: 5px;
-}
-
-.plan-meta {
-	font-size: 14px;
-	margin-bottom: 5px;
-	color: #6c757d;
-}
-.plan-meta-container {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	margin-top: 10px;
-}
-
-.plan-meta-item {
-	flex: 1;
-	font-size: 14px;
-	margin-right: 15px;
-}
-
-.plan-meta-item strong {
-	font-weight: bold;
-	display: block;
-	color: #333333;
-}
-
-.plan-meta-item span {
-	font-weight: normal;
-	color: #6c757d;
-}
-
-.plan-data h6 {
-	font-size: 20px;
-	font-weight: bold;
-	color: #000000;
-	text-align: right;
-}
-
-.btn-generate-proxy {
-	white-space: nowrap;
-	background-color: #f0f8ff;
-	border: 1px solid #007bff;
-	color: #007bff;
-	padding: 8px 15px;
-	border-radius: 6px;
-}
-
-.btn-generate-proxy:hover {
-	background-color: #007bff;
-	color: #fff;
-}
-
-.gift-code-input {
-	border: 1px solid #ced4da;
-	border-radius: 6px;
-	padding: 7px;
-	flex-shrink: 1;
-	width: 250px; /* Adjust width as needed */
-}
-
-.gift-code-btn {
-	white-space: nowrap;
-	flex-shrink: 0;
-	margin-left: 10px;
-}
-
-.gift-help-text {
-	font-size: 14px;
-	color: #6c757d;
-	margin-left: 10px;
-}
-
-.gift-help-link {
-	color: #007bff;
-	margin-left: 5px;
-}
-
-.filter-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: #fff;
-	border: 1px solid #ced4da;
-	padding: 10px 15px;
-	border-radius: 6px;
-	margin-left: 20px;
-}
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .section-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .gift-code-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .gift-code-input {
+    flex-grow: 1;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
+  
+  .gift-code-btn {
+    white-space: nowrap;
+  }
+  
+  .gift-help-text {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .plan-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .progress-circle-container {
+    flex-shrink: 0;
+  }
+  
+  .progress-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .plan-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .plan-description {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .plan-meta {
+    font-size: 14px;
+  }
+  
+  .btn-generate-proxy {
+    white-space: nowrap;
+  }
+  
+  .filter-btn {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
 
 .sidebar-wrapper {
 	width: 300px;
@@ -1339,6 +1275,24 @@
 	font-size: 1.2rem;
 	margin-bottom: 15px;
 	font-weight: bold;
+}
+
+.configure-proxy {
+	background-color: #fff;
+	padding: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #e9ecef;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tab-container {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	margin: 20px;
+	
 }
 
 .proxy-config {

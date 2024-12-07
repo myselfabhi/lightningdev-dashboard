@@ -33,7 +33,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({ addBalance, renewPlan, bala
 			{/* Cards Section */}
 			<div className="row gx-4 gy-4">
 				{/* Active Balance */}
-				<div className="col-12 col-md-6 col-lg-6">
+				<div className="col-12 col-md-6 col-lg-5">
 					<div className="card custom-card text-start">
 						<div className="icon-style">
 							<FaDollarSign />
@@ -49,7 +49,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({ addBalance, renewPlan, bala
 				</div>
 
 				{/* Active Plans */}
-				<div className="col-12 col-md-6 col-lg-6">
+				<div className="col-12 col-md-6 col-lg-5">
 					<div className="card custom-card text-start">
 						<div className="icon-style">
 							<FaShoppingCart />
@@ -65,7 +65,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({ addBalance, renewPlan, bala
 				</div>
 
 				{/* Data Left */}
-				<div className="col-12 col-md-6 col-lg-6">
+				<div className="col-12 col-md-6 col-lg-5">
 					<div className="card custom-card text-start">
 						<div className="icon-style">
 							<FaServer />
@@ -81,7 +81,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({ addBalance, renewPlan, bala
 				</div>
 
 				{/* User Profile */}
-				<div className="col-12 col-md-6 col-lg-6">
+				<div className="col-12 col-md-6 col-lg-5">
 					<div className="card custom-card text-center">
 						<div className="icon-style-4">
 							<FaUser />
