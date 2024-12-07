@@ -26,19 +26,6 @@
     flex-grow: 1; /* Take up remaining space */
   }
   
-  .navbar-container {
-    position: fixed;
-    top: 0;
-    left: 250px; /* Matches Sidebar width */
-    right: 0;
-    height: 60px; /* Ensure consistent height */
-    z-index: 1000;
-    background-color: #ffffff;
-    border-bottom: 1px solid #dee2e6;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;  /* Padding for spacing */
-  }
   
   .dashboard-content {
     flex-grow: 1; /* Takes up the remaining vertical space */

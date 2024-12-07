@@ -1,26 +1,37 @@
-import React from "react";
 import {
-  FaHome,
-  FaCartPlus,
-  FaWallet,
-  FaFileInvoice,
-  FaServer,
-  FaUsers,
-  FaQuestionCircle,
-  FaBook,
-  FaTelegramPlane,
-  FaDiscord,
-  FaRegNewspaper,
-} from "react-icons/fa";
+  Home,
+  ShoppingCart,
+  Wallet,
+  FileText,
+  Server,
+  Users, Globe,
+  ChevronLeft
+} from "lucide-react";
 import Link from "next/link";
 import "./sidebar.css";
+import { useState } from "react";
 
-const Sidebar: React.FC = () => {
+const Sidebar = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
     <aside className="sidebar-wrapper">
       {/* Logo Section */}
       <div className="logo-box">
-        <img src="/logo.svg" alt="Lightning Proxies Logo" className="logo" />
+        <img
+          src="https://lightningproxies.net/assets/images/logo.svg"
+          alt="Lightning Proxies Logo"
+          className="logo"
+        />
+        <button className="toggle-btn" onClick={toggleSidebar}>
+<ChevronLeft
+  size={18}
+  className={`toggle-icon ${isSidebarOpen ? "" : "rotate"}`}
+/>
+</button>
       </div>
 
       {/* Main Menu */}
@@ -30,7 +41,7 @@ const Sidebar: React.FC = () => {
           <li className="menu-item">
             <Link href="/">
               <div className="menu-link">
-                <FaHome size={18} className="menu-icon" />
+                <Home size={18} className="menu-icon" />
                 <span>Dashboard</span>
               </div>
             </Link>
@@ -38,7 +49,7 @@ const Sidebar: React.FC = () => {
           <li className="menu-item">
             <Link href="/purchase-plan">
               <div className="menu-link">
-                <FaCartPlus size={18} className="menu-icon" />
+                <ShoppingCart size={18} className="menu-icon" />
                 <span>Purchase Plan</span>
               </div>
             </Link>
@@ -46,7 +57,7 @@ const Sidebar: React.FC = () => {
           <li className="menu-item">
             <Link href="/deposit-balance">
               <div className="menu-link">
-                <FaWallet size={18} className="menu-icon" />
+                <Wallet size={18} className="menu-icon" />
                 <span>Deposit Balance</span>
               </div>
             </Link>
@@ -54,7 +65,7 @@ const Sidebar: React.FC = () => {
           <li className="menu-item">
             <Link href="/invoices">
               <div className="menu-link">
-                <FaFileInvoice size={18} className="menu-icon" />
+                <FileText size={18} className="menu-icon" />
                 <span>Invoices</span>
               </div>
             </Link>
@@ -62,7 +73,7 @@ const Sidebar: React.FC = () => {
           <li className="menu-item">
             <Link href="/proxy-usage-log">
               <div className="menu-link">
-                <FaServer size={18} className="menu-icon" />
+                <Server size={18} className="menu-icon" />
                 <span>Proxy Usage Log</span>
               </div>
             </Link>
@@ -70,48 +81,9 @@ const Sidebar: React.FC = () => {
           <li className="menu-item">
             <Link href="/sub-users-management">
               <div className="menu-link">
-                <FaUsers size={18} className="menu-icon" />
+                <Users size={18} className="menu-icon" />
                 <span>Sub-Users</span>
-                <span className="badge badge-new">New</span>
-              </div>
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      {/* Referrals */}
-      <div className="menu-set">
-        <h6 className="menu-heading">REFERRALS</h6>
-        <ul className="menu">
-          <li className="menu-item">
-            <Link href="/referrals">
-              <div className="menu-link">
-                <FaUsers size={18} className="menu-icon" />
-                <span>Referral</span>
-              </div>
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      {/* Support */}
-      <div className="menu-set">
-        <h6 className="menu-heading">SUPPORT</h6>
-        <ul className="menu">
-          <li className="menu-item">
-            <Link href="/faqs">
-              <div className="menu-link">
-                <FaQuestionCircle size={18} className="menu-icon" />
-                <span>FAQs</span>
-              </div>
-            </Link>
-          </li>
-          <li className="menu-item">
-            <Link href="/proxy-guide">
-              <div className="menu-link">
-                <FaBook size={18} className="menu-icon" />
-                <span>Proxy Guide</span>
-                <span className="badge badge-updated">Updated</span>
+                {/* <span className="badge badge-new">New</span> */}
               </div>
             </Link>
           </li>
@@ -125,7 +97,7 @@ const Sidebar: React.FC = () => {
           <li className="menu-item">
             <Link href="/reseller-dashboard">
               <div className="menu-link">
-                <FaRegNewspaper size={18} className="menu-icon" />
+                <Globe size={18} className="menu-icon" />
                 <span>Dashboard</span>
               </div>
             </Link>
@@ -133,7 +105,7 @@ const Sidebar: React.FC = () => {
           <li className="menu-item">
             <Link href="/api-docs">
               <div className="menu-link">
-                <FaRegNewspaper size={18} className="menu-icon" />
+                <Globe size={18} className="menu-icon" />
                 <span>API Docs</span>
               </div>
             </Link>
@@ -152,7 +124,11 @@ const Sidebar: React.FC = () => {
               rel="noopener noreferrer"
               className="menu-link"
             >
-              <FaDiscord size={18} className="menu-icon" />
+              <img
+                src="https://lightningproxies.net/assets/images/sidebar-icons/social-03.svg"
+                alt="Discord"
+                className="menu-icon"
+              />
               <span>Join Discord Server</span>
             </a>
           </li>
@@ -163,26 +139,41 @@ const Sidebar: React.FC = () => {
               rel="noopener noreferrer"
               className="menu-link"
             >
-              <FaTelegramPlane size={18} className="menu-icon" />
+              <img
+                src="https://lightningproxies.net/assets/images/sidebar-icons/social-01.svg"
+                alt="Telegram"
+                className="menu-icon"
+              />
               <span>Join Telegram Channel</span>
             </a>
           </li>
         </ul>
       </div>
 
-      {/* Extension Section */}
+      {/* LightningProxies Extension */}
       <div className="extension-section">
-        <div className="extension-header">
-          <img src="/logo-extension.svg" alt="Extension Logo" />
-          <span>LightningProxies Extension</span>
-          <span className="badge badge-new">NEW</span>
-        </div>
-        <p className="extension-description">
-          A proxy extension enhances online privacy by routing traffic through
-          an intermediary server.
-        </p>
-        <button className="btn btn-primary extension-btn">Add to Chrome</button>
-      </div>
+  <span className="badge badge-new">NEW</span>
+  <div className="extension-header">
+    <img
+      src="https://lightningproxies.net/assets/images/logo.svg"
+      alt="LightningProxies Logo"
+      className="extension-logo"
+    />
+    <span className="extension-title">LightningProxies Extension</span>
+  </div>
+  <p className="extension-description">
+    A proxy extension enhances online privacy by routing traffic through an intermediary server.
+  </p>
+  <button className="extension-btn">
+    <img
+      src="https://lightningproxies.net/assets/images/chrome.svg"
+      alt="Chrome Icon"
+      className="chrome-icon"
+    />
+    Add to Chrome
+  </button>
+</div>
+
 
       {/* Footer */}
       <div className="sidebar-footer">
@@ -201,7 +192,11 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaDiscord size={20} />
+              <img
+                src="https://lightningproxies.net/assets/images/sidebar-icons/social-03.svg"
+                alt="Discord"
+                className="social-icon"
+              />
             </a>
           </li>
           <li>
@@ -210,7 +205,11 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTelegramPlane size={20} />
+              <img
+                src="https://lightningproxies.net/assets/images/sidebar-icons/social-01.svg"
+                alt="Telegram"
+                className="social-icon"
+              />
             </a>
           </li>
         </ul>

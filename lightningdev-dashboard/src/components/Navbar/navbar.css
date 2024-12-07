@@ -1,8 +1,9 @@
 /* Navbar Container */
 .navbar-container {
-  background-color: #ffffff;
+  background-color: #F5F6F9;
   /* margin-left: 170px;
   margin-right: 170px; */
+  margin-left: 50px;
   /* border-bottom: 1px solid #dee2e6; */
   font-size: 14px;
   height: 120px;
@@ -20,6 +21,7 @@
 /* Home Icon */
 .navbar-container .home-icon i {
   font-size: 24px;
+  margin-left: 70px;
   color: #6c757d;
 }
 
