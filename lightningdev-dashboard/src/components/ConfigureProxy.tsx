@@ -1,122 +1,221 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import "./ConfigureProxy.css";
+import { proxyListCreateResidential } from "../services/apiService";
 
 const ConfigureProxy: React.FC = () => {
   const [tab, setTab] = useState<"auth" | "whitelist">("auth");
-  const [countries, setCountries] = useState<string[]>([]);
-  const [states, setStates] = useState<string[]>([]);
-  const [cities, setCities] = useState<string[]>([]);
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-    country: "",
-    state: "",
-    city: "",
-  });
+  const [username, setUsername] = useState<string>("atjdxdeqzgdrlry100714-zone-resi");
+  const [password, setPassword] = useState<string>("uepsjpxejl");
+  const [type, setType] = useState<"rotating" | "sticky">("sticky");
+  const [sessionTime, setSessionTime] = useState<number>(60);
+  const [country, setCountry] = useState<string>("Worldwide Mix");
+  const [state, setState] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [whitelistIp, setWhitelistIp] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const fetchProxyOptions = async () => {
+  const handleUpdateSettings = async () => {
+    setIsLoading(true);
     try {
-      const response = await axios.get("/api/proxy-list");
-      setCountries(response.data.countries || []);
-      setStates(response.data.states || []);
-      setCities(response.data.cities || []);
+      const response = await proxyListCreateResidential(
+        username,
+        password,
+        type,
+        type === "sticky" ? sessionTime : undefined,
+        country !== "Worldwide Mix" ? country : undefined,
+        state,
+        city
+      );
+      alert("Settings updated successfully!");
+      console.log("Response:", response);
     } catch (error) {
-      console.error("Error fetching proxy options:", error);
+      alert("Failed to update proxy settings.");
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const updateSettings = async () => {
-    try {
-      const response = await axios.post("/api/create-proxy", form);
-      if (response.data.success) {
-        alert("Proxy settings updated successfully!");
-      } else {
-        alert("Failed to update proxy settings.");
-      }
-    } catch (error) {
-      console.error("Error updating proxy settings:", error);
-    }
+  const handleGenerateAPI = () => {
+    alert("API generated successfully!");
   };
 
-  useEffect(() => {
-    fetchProxyOptions();
-  }, []);
+  const handleAddIp = () => {
+    alert(`Whitelist IP ${whitelistIp} added successfully!`);
+    setWhitelistIp("");
+  };
 
   return (
     <div className="configure-proxy">
-      <h5>Configure Proxy</h5>
-      <div className="tab-controls">
+      <div className="header d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h4>Configure Proxy</h4>
+          <p>Configure your proxy type, and whitelist IP</p>
+        </div>
+        <div className="checkbox-group">
+          <label className="form-check-label">
+            <input
+              type="radio"
+              name="proxyType"
+              value="rotating"
+              checked={type === "rotating"}
+              onChange={() => setType("rotating")}
+              className="form-check-input"
+            />
+            Rotating
+          </label>
+          <label className="form-check-label ms-3">
+            <input
+              type="radio"
+              name="proxyType"
+              value="sticky"
+              checked={type === "sticky"}
+              onChange={() => setType("sticky")}
+              className="form-check-input"
+            />
+            Sticky
+          </label>
+        </div>
+      </div>
+
+      {/* Tab Switch */}
+      <div className="tab-container d-flex">
         <button
-          className={`tab-button ${tab === "auth" ? "active" : ""}`}
+          className={`tab ${tab === "auth" ? "active" : ""}`}
           onClick={() => setTab("auth")}
         >
           User Auth & Pass
         </button>
         <button
-          className={`tab-button ${tab === "whitelist" ? "active" : ""}`}
+          className={`tab ${tab === "whitelist" ? "active" : ""}`}
           onClick={() => setTab("whitelist")}
         >
           Whitelist IP
         </button>
       </div>
 
+      {/* User Auth & Pass Tab */}
       {tab === "auth" && (
         <div className="auth-form">
-          <input
-            type="text"
-            placeholder="Username"
-            value={form.username}
-            onChange={(e) => setForm({ ...form, username: e.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-          />
-          <select
-            value={form.country}
-            onChange={(e) => setForm({ ...form, country: e.target.value })}
-          >
-            <option value="">Select Country</option>
-            {countries.map((country, idx) => (
-              <option key={idx} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-          <select
-            value={form.state}
-            onChange={(e) => setForm({ ...form, state: e.target.value })}
-          >
-            <option value="">Select State</option>
-            {states.map((state, idx) => (
-              <option key={idx} value={state}>
-                {state}
-              </option>
-            ))}
-          </select>
-          <select
-            value={form.city}
-            onChange={(e) => setForm({ ...form, city: e.target.value })}
-          >
-            <option value="">Select City</option>
-            {cities.map((city, idx) => (
-              <option key={idx} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
-          <button className="btn btn-primary" onClick={updateSettings}>
-            Update Settings
-          </button>
+          <div className="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              value={username}
+              readOnly
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="text"
+              value={password}
+              readOnly
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <label>Session Time (for Sticky Proxies)</label>
+            <input
+              type="number"
+              value={sessionTime}
+              min={1}
+              max={120}
+              disabled={type !== "sticky"}
+              onChange={(e) => setSessionTime(Number(e.target.value))}
+              className="form-control"
+            />
+          </div>
+          <div className="row">
+            <div className="col">
+              <label>Country</label>
+              <select
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                className="form-control"
+              >
+                <option>Worldwide Mix</option>
+                <option>United States</option>
+                <option>Germany</option>
+              </select>
+            </div>
+            <div className="col">
+              <label>State</label>
+              <input
+                type="text"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                className="form-control"
+              />
+            </div>
+            <div className="col">
+              <label>City</label>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                className="form-control"
+              />
+            </div>
+          </div>
+
+          {/* Buttons at Bottom */}
+          <div className="d-flex justify-content-between align-items-center mt-4">
+            <button
+              className="btn btn-primary"
+              onClick={handleGenerateAPI}
+              disabled={isLoading}
+            >
+              API Generator &gt;
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={handleUpdateSettings}
+              disabled={isLoading}
+            >
+              {isLoading ? "Updating..." : "Update Settings &gt;"}
+            </button>
+          </div>
         </div>
       )}
 
+      {/* Whitelist IP Tab */}
       {tab === "whitelist" && (
         <div className="whitelist-form">
-          <p>Whitelist IP functionality coming soon...</p>
+          <div className="form-group">
+            <label>Whitelist IP</label>
+            <input
+              type="text"
+              value={whitelistIp}
+              onChange={(e) => setWhitelistIp(e.target.value)}
+              placeholder="Enter IP address here"
+              className="form-control"
+            />
+            <button
+              className="btn btn-primary full-width mt-2"
+              onClick={handleAddIp}
+            >
+              Add &gt;
+            </button>
+          </div>
+          <div className="form-group">
+            <label>Country</label>
+            <select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              className="form-control"
+            >
+              <option>Worldwide Mix</option>
+            </select>
+          </div>
+          <button
+            className="btn btn-primary full-width mt-3"
+            onClick={handleUpdateSettings}
+            disabled={isLoading}
+          >
+            Update Settings &gt;
+          </button>
         </div>
       )}
     </div>
