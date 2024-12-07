@@ -1,7 +1,6 @@
 .sidebar-wrapper {
   width: 300px;
-  height: 100vh;
-  overflow-y: scroll;
+  /* height: 100vh; */
   overflow-y: scroll;
   overflow-y: auto;
   background-color: #fff;

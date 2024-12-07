@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ConfigureProxy.css";
 import { proxyListCreateResidential } from "../services/apiService";
+import toast from "react-hot-toast";
 
 const ConfigureProxy: React.FC = () => {
   const [tab, setTab] = useState<"auth" | "whitelist">("auth");
@@ -9,10 +10,18 @@ const ConfigureProxy: React.FC = () => {
   const [type, setType] = useState<"rotating" | "sticky">("sticky");
   const [sessionTime, setSessionTime] = useState<number>(60);
   const [country, setCountry] = useState<string>("Worldwide Mix");
-  const [state, setState] = useState<string>("");
-  const [city, setCity] = useState<string>("");
+  const [state, setState] = useState<string>("Worldwide Mix");
+  const [city, setCity] = useState<string>("Worldwide Mix");
+  const [isp, setIsp] = useState<string>("Worldwide Mix");
+  const [mode, setMode] = useState<"CountryStateCity" | "CountryISP">("CountryStateCity");
   const [whitelistIp, setWhitelistIp] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Sample dropdown options
+  const countryOptions = ["Worldwide Mix", "United States", "Germany", "India"];
+  const stateOptions = ["Worldwide Mix", "California", "Bavaria", "Karnataka"];
+  const cityOptions = ["Worldwide Mix", "San Francisco", "Munich", "Bangalore"];
+  const ispOptions = ["Worldwide Mix", "Comcast", "AT&T", "Vodafone"];
 
   const handleUpdateSettings = async () => {
     setIsLoading(true);
@@ -23,13 +32,13 @@ const ConfigureProxy: React.FC = () => {
         type,
         type === "sticky" ? sessionTime : undefined,
         country !== "Worldwide Mix" ? country : undefined,
-        state,
-        city
+        mode === "CountryStateCity" && state !== "Worldwide Mix" ? state : undefined,
+        mode === "CountryStateCity" && city !== "Worldwide Mix" ? city : undefined
       );
-      alert("Settings updated successfully!");
+      toast.success("Settings updated successfully!");
       console.log("Response:", response);
     } catch (error) {
-      alert("Failed to update proxy settings.");
+      toast.error("Failed to update proxy settings.");
       console.error("Error:", error);
     } finally {
       setIsLoading(false);
@@ -37,11 +46,11 @@ const ConfigureProxy: React.FC = () => {
   };
 
   const handleGenerateAPI = () => {
-    alert("API generated successfully!");
+    toast.success("API generated successfully!");
   };
 
   const handleAddIp = () => {
-    alert(`Whitelist IP ${whitelistIp} added successfully!`);
+    toast.success(`Whitelist IP ${whitelistIp} added successfully!`);
     setWhitelistIp("");
   };
 
@@ -115,50 +124,101 @@ const ConfigureProxy: React.FC = () => {
               className="form-control"
             />
           </div>
-          <div className="form-group">
-            <label>Session Time (for Sticky Proxies)</label>
-            <input
-              type="number"
-              value={sessionTime}
-              min={1}
-              max={120}
-              disabled={type !== "sticky"}
-              onChange={(e) => setSessionTime(Number(e.target.value))}
-              className="form-control"
-            />
+
+          {/* Toggle Buttons */}
+          <div className="form-group d-flex gap-3 mb-4">
+            <button
+              className={`btn ${mode === "CountryStateCity" ? "btn-primary" : "btn-outline-primary"}`}
+              onClick={() => setMode("CountryStateCity")}
+            >
+              Country - State - City
+            </button>
+            <button
+              className={`btn ${mode === "CountryISP" ? "btn-primary" : "btn-outline-primary"}`}
+              onClick={() => setMode("CountryISP")}
+            >
+              Country - ISP
+            </button>
           </div>
-          <div className="row">
-            <div className="col">
-              <label>Country</label>
-              <select
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                className="form-control"
-              >
-                <option>Worldwide Mix</option>
-                <option>United States</option>
-                <option>Germany</option>
-              </select>
+
+          {/* Dynamic Fields */}
+          {mode === "CountryStateCity" ? (
+            <div className="row">
+              <div className="col">
+                <label>Country</label>
+                <select
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  className="form-control"
+                >
+                  {countryOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="col">
+                <label>State</label>
+                <select
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className="form-control"
+                >
+                  {stateOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="col">
+                <label>City</label>
+                <select
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="form-control"
+                >
+                  {cityOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div className="col">
-              <label>State</label>
-              <input
-                type="text"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-                className="form-control"
-              />
+          ) : (
+            <div className="row">
+              <div className="col">
+                <label>Country</label>
+                <select
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  className="form-control"
+                >
+                  {countryOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="col">
+                <label>ISP</label>
+                <select
+                  value={isp}
+                  onChange={(e) => setIsp(e.target.value)}
+                  className="form-control"
+                >
+                  {ispOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div className="col">
-              <label>City</label>
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                className="form-control"
-              />
-            </div>
-          </div>
+          )}
 
           {/* Buttons at Bottom */}
           <div className="d-flex justify-content-between align-items-center mt-4">
@@ -206,7 +266,11 @@ const ConfigureProxy: React.FC = () => {
               onChange={(e) => setCountry(e.target.value)}
               className="form-control"
             >
-              <option>Worldwide Mix</option>
+              {countryOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
           </div>
           <button
