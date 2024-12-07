@@ -24,7 +24,7 @@ const PlanSection: React.FC = () => {
         setLoading(true);
         const response = await axios.get<Plan[]>("/api/use-plan");
         setPlans(response.data);
-      } catch (err) {
+      } catch (error) {
         setError("Failed to fetch plans. Please try again later.");
       } finally {
         setLoading(false);

@@ -15,7 +15,7 @@ const SubUsersManagement: React.FC = () => {
   const [proxyUsername, setProxyUsername] = useState<string>(""); 
   const [proxyPassword, setProxyPassword] = useState<string>(""); 
   const [loading, setLoading] = useState<boolean>(false); 
-  const [message, setMessage] = useState<string | null>(null); 
+  const [message] = useState<string | null>(null); 
 
   const [usernames, setUsernames] = useState<
     { id: string; name: string; bandwidth: number; bandwidthLeft: string }[]
@@ -148,7 +148,7 @@ const SubUsersManagement: React.FC = () => {
     try {
       const duration = 3;
 
-      const response = await removeGigabytes(selectedUsername, gbToRemove, duration);
+      const response = await removeGigabytes(selectedUsername, gbToRemove);
       console.log("Remove Gigabytes Response:", response);
 
       toast.error(`Successfully removed ${gbToRemove} GB from ${selectedUsername}`);
@@ -314,7 +314,7 @@ const SubUsersManagement: React.FC = () => {
       <div className="container">
         <div className="header mb-4">
           <h5>Sub-users management</h5>
-          <p>Empower your team's efficiency with seamless sub-user management.</p>
+          <p>Empower your team efficiency with seamless sub-user management.</p>
         </div>
         <div className="card p-4 shadow-sm">
           <div className="mb-3">

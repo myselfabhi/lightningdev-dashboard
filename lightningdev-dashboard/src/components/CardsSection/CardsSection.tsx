@@ -26,7 +26,6 @@ type CardsSectionProps = {
 const CardsSection: React.FC<CardsSectionProps> = ({
   addBalance,
   renewPlan,
-  fetchUserInfo,
   balance,
   activePlans,
   dataLeft,
@@ -34,8 +33,8 @@ const CardsSection: React.FC<CardsSectionProps> = ({
   username,
   userId,
 }) => {
-  const dataLeftPercentage =
-    totalDataPurchased > 0 ? ((dataLeft / totalDataPurchased) * 100).toFixed(0) : "0";
+  // const dataLeftPercentage =
+  //   totalDataPurchased > 0 ? ((dataLeft / totalDataPurchased) * 100).toFixed(0) : "0";
 
   return (
     <div className="container cards-section">
@@ -43,7 +42,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h4 className="mb-1">Welcome {username}</h4>
-          <p className="text-muted">Welcome back, we're glad to have you.</p>
+          <p className="text-muted">Welcome back, were glad to have you.</p>
         </div>
         <button className="btn btn-light shadow-sm read-more-btn">
           <FaShieldAlt className="me-2" /> Residential State/City Targeting{" "}

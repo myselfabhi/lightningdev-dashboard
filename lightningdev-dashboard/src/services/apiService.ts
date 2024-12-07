@@ -72,7 +72,7 @@ export const addGigabytes = async (
 
 // Remove Gigabytes
 export const removeGigabytes = async (
-username: string, gigabytes: number, duration: number): Promise<any> => {
+username: string, gigabytes: number): Promise<any> => {
   try {
     const response = await axios.post(
       `${BASE_URL}/remove-gigabytes`,

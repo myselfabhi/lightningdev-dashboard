@@ -21,7 +21,7 @@ const PurchasePlan: React.FC = () => {
     alert(`You have purchased the ${planTitle}`);
   };
 
-  const renderCards = (plans: any[]) => {
+  const renderCards = (plans: { title: string; price: string; details: string[] }[] ) => {
     return plans.map((plan, index) => (
       <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
         <PlanCard

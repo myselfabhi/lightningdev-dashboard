@@ -5,10 +5,10 @@ import toast from "react-hot-toast";
 
 const ConfigureProxy: React.FC = () => {
   const [tab, setTab] = useState<"auth" | "whitelist">("auth");
-  const [username, setUsername] = useState<string>("atjdxdeqzgdrlry100714-zone-resi");
-  const [password, setPassword] = useState<string>("uepsjpxejl");
+  const [username] = useState<string>("atjdxdeqzgdrlry100714-zone-resi");
+  const [password] = useState<string>("uepsjpxejl");
   const [type, setType] = useState<"rotating" | "sticky">("sticky");
-  const [sessionTime, setSessionTime] = useState<number>(60);
+  const [sessionTime] = useState<number>(60);
   const [country, setCountry] = useState<string>("Worldwide Mix");
   const [state, setState] = useState<string>("Worldwide Mix");
   const [city, setCity] = useState<string>("Worldwide Mix");

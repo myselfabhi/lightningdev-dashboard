@@ -13,7 +13,7 @@ const ProxyDetails: React.FC = () => {
     const username = "atjxdeqzgdlry100714-zone-resi";
     const password = "uepsjpxeji";
 
-    const generatedProxies = Array.from({ length: stickyCount }, (_, idx) => {
+    const generatedProxies = Array.from({ length: stickyCount }, () => {
       const sessionID = Math.random().toString(36).substr(2, 8); // Generate random session ID
       return `${baseProxy}:${username}-sessTime-${sessionTime}-session-${sessionID}:${password}`;
     });
