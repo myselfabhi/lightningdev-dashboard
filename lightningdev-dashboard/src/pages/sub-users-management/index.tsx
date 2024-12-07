@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import {
-  createUserResidential,
   addGigabytes,
-  removeGigabytes
+  createUserResidential,
+  removeGigabytes,
 } from "../../services/apiService";
 import "./SubUsersManagement.css";
+import toast from "react-hot-toast";
 
 const SubUsersManagement: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -16,7 +17,9 @@ const SubUsersManagement: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false); 
   const [message, setMessage] = useState<string | null>(null); 
 
-  const [usernames, setUsernames] = useState<string[]>([]); 
+  const [usernames, setUsernames] = useState<
+    { id: string; name: string; bandwidth: number; bandwidthLeft: string }[]
+  >([]); // List of Usernames
   const [selectedUsername, setSelectedUsername] = useState<string>(""); 
 
   const [gbToAdd, setGbToAdd] = useState<number>(0); 
@@ -29,39 +32,93 @@ const SubUsersManagement: React.FC = () => {
 
   const handleCreateUser = async () => {
     if (!proxyUsername || !proxyPassword || !customerName) {
-      setMessage("Please fill in all required fields.");
+      toast.error("Please fill in all required fields.");
       return;
     }
 
     setLoading(true);
-    setMessage(null);
 
     try {
       const email = `${proxyUsername}@lightningproxies.net`;
       const response = await createUserResidential(proxyUsername, email, proxyPassword);
       console.log("Create User Response:", response);
 
-      setUsernames((prev) => [...prev, proxyUsername]);
-      setMessage(`User created successfully: ${proxyUsername}`);
+      setUsernames((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          name: proxyUsername,
+          bandwidth: 0,
+          bandwidthLeft: "0 GB",
+        },
+      ]);
+
+      toast.error(`User created successfully: ${proxyUsername}`);
       setCustomerName("");
       setProxyUsername("");
       setProxyPassword("");
     } catch (error) {
       console.error("Error creating user:", error);
-      setMessage("Failed to create user. Please try again.");
+      toast.error("Failed to create user. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleGenerateRandom = () => {
+    const length = Math.floor(Math.random() * (15 - 6 + 1)) + 6; // Random length between 6 and 15
+  
+    const getRandomChar = (characters: string) =>
+      characters.charAt(Math.floor(Math.random() * characters.length));
+  
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowercase = "abcdefghijklmnopqrstuvwxyz";
+    const digits = "0123456789";
+    const allowedSymbols = "!@#$%^&*?_";
+  
+    // Ensure the password includes at least one character of each required type
+    let password = "";
+    password += getRandomChar(uppercase); // At least one uppercase letter
+    password += getRandomChar(lowercase); // At least one lowercase letter
+    password += getRandomChar(digits); // At least one digit
+    password += getRandomChar(allowedSymbols); // At least one special character
+  
+    // Fill the remaining characters with a mix of all allowed characters
+    const allCharacters = uppercase + lowercase + digits + allowedSymbols;
+    while (password.length < length) {
+      password += getRandomChar(allCharacters);
+    }
+  
+    // Shuffle the password to randomize character positions
+    password = password
+      .split("")
+      .sort(() => Math.random() - 0.5)
+      .join("");
+  
+    // Debugging logs to verify password meets criteria
+    console.log("Generated Password:", password);
+  
+    // Set the username and password in the state
+    setProxyUsername(`proxy${Math.floor(1000 + Math.random() * 9000)}`); // Random username
+    setProxyPassword(password); // Valid password
+  };
+  
+  
+  
+
+  const handleDeleteUser = (id: string) => {
+    setUsernames((prev) => prev.filter((user) => user.id !== id));
+    toast.error("User deleted successfully.");
+  };
+
   const handleAddGigabytes = async () => {
     if (!selectedUsername || gbToAdd <= 0) {
-      setMessage("Please select a username and provide a valid GB value to add.");
+      toast.error("Please select a username and provide a valid GB value to add.");
       return;
     }
 
     setLoading(true);
-    setMessage(null);
+    toast.error(null);
 
     try {
       const flow = 1;
@@ -70,10 +127,10 @@ const SubUsersManagement: React.FC = () => {
       const response = await addGigabytes(selectedUsername, flow, duration);
       console.log("Add Gigabytes Response:", response);
 
-      setMessage(`Successfully added ${gbToAdd} GB to ${selectedUsername}`);
+      toast.error(`Successfully added ${gbToAdd} GB to ${selectedUsername}`);
     } catch (error: any) {
       console.error("Error in Add Gigabytes:", error);
-      setMessage(`Failed to add gigabytes: ${error.response?.data?.error || error.message}`);
+      toast.error(`Failed to add gigabytes: ${error.response?.data?.error || error.message}`);
     } finally {
       setLoading(false);
     }
@@ -81,12 +138,12 @@ const SubUsersManagement: React.FC = () => {
 
   const handleRemoveGigabytes = async () => {
     if (!selectedUsername || gbToRemove <= 0) {
-      setMessage("Please select a username and provide a valid GB value to remove.");
+      toast.error("Please select a username and provide a valid GB value to remove.");
       return;
     }
 
     setLoading(true);
-    setMessage(null);
+    toast.error(null);
 
     try {
       const duration = 3;
@@ -94,10 +151,10 @@ const SubUsersManagement: React.FC = () => {
       const response = await removeGigabytes(selectedUsername, gbToRemove, duration);
       console.log("Remove Gigabytes Response:", response);
 
-      setMessage(`Successfully removed ${gbToRemove} GB from ${selectedUsername}`);
+      toast.error(`Successfully removed ${gbToRemove} GB from ${selectedUsername}`);
     } catch (error: any) {
       console.error("Error in Remove Gigabytes:", error);
-      setMessage(`Failed to remove gigabytes: ${error.response?.data?.error || error.message}`);
+      toast.error(`Failed to remove gigabytes: ${error.response?.data?.error || error.message}`);
     } finally {
       setLoading(false);
     }
@@ -142,9 +199,21 @@ const SubUsersManagement: React.FC = () => {
                 value={proxyPassword}
                 onChange={(e) => setProxyPassword(e.target.value)}
               />
-              <button className="btn btn-primary mt-2" onClick={handleCreateUser} disabled={loading}>
-                {loading ? "Creating..." : "Generate User"}
-              </button>
+              <div className="d-flex justify-content-between">
+                <button
+                  className="btn btn-primary mt-2"
+                  onClick={handleGenerateRandom}
+                >
+                  Generate
+                </button>
+                <button
+                  className="btn btn-primary mt-2"
+                  onClick={handleCreateUser}
+                  disabled={loading}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         );
@@ -163,15 +232,30 @@ const SubUsersManagement: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>674f44e094c12e1048c1ea46</td>
-                  <td>John Doe</td>
-                  <td>0</td>
-                  <td>0 GB</td>
-                  <td>
-                    <button className="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
+                {usernames.length > 0 ? (
+                  usernames.map((user) => (
+                    <tr key={user.id}>
+                      <td>{user.id}</td>
+                      <td>{user.name}</td>
+                      <td>{user.bandwidth}</td>
+                      <td>{user.bandwidthLeft}</td>
+                      <td>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => handleDeleteUser(user.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="text-center">
+                      No users available.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -189,9 +273,9 @@ const SubUsersManagement: React.FC = () => {
                 onChange={(e) => setSelectedUsername(e.target.value)}
               >
                 <option value="">Select a user</option>
-                {usernames.map((username) => (
-                  <option key={username} value={username}>
-                    {username}
+                {usernames.map((user) => (
+                  <option key={user.id} value={user.name}>
+                    {user.name}
                   </option>
                 ))}
               </select>
@@ -232,7 +316,6 @@ const SubUsersManagement: React.FC = () => {
           <h5>Sub-users management</h5>
           <p>Empower your team's efficiency with seamless sub-user management.</p>
         </div>
-
         <div className="card p-4 shadow-sm">
           <div className="mb-3">
             <select
@@ -248,30 +331,28 @@ const SubUsersManagement: React.FC = () => {
             </select>
           </div>
           <div className="accordion-container">
-  <div className="tabs">
-    <button
-      className={`btn ${activeTab === "Create" ? "active" : ""}`}
-      onClick={() => setActiveTab("Create")}
-    >
-      Create User
-    </button>
-    <button
-      className={`btn ${activeTab === "Delete" ? "active" : ""}`}
-      onClick={() => setActiveTab("Delete")}
-    >
-      Delete User
-    </button>
-    <button
-      className={`btn ${activeTab === "Manage" ? "active" : ""}`}
-      onClick={() => setActiveTab("Manage")}
-    >
-      Manage User
-    </button>
-  </div>
-</div>
-
+            <div className="tabs">
+              <button
+                className={`btn ${activeTab === "Create" ? "active" : ""}`}
+                onClick={() => setActiveTab("Create")}
+              >
+                Create User
+              </button>
+              <button
+                className={`btn ${activeTab === "Delete" ? "active" : ""}`}
+                onClick={() => setActiveTab("Delete")}
+              >
+                Delete User
+              </button>
+              <button
+                className={`btn ${activeTab === "Manage" ? "active" : ""}`}
+                onClick={() => setActiveTab("Manage")}
+              >
+                Manage User
+              </button>
+            </div>
+          </div>
         </div>
-
         <div className="mt-4">{renderContent()}</div>
       </div>
     </Layout>
