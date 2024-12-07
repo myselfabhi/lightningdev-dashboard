@@ -23,13 +23,14 @@ const PurchasePlan: React.FC = () => {
 
   const renderCards = (plans: any[]) => {
     return plans.map((plan, index) => (
-      <PlanCard
-        key={index}
-        title={plan.title}
-        price={plan.price}
-        details={plan.details}
-        onPurchase={() => handlePurchase(plan.title)}
-      />
+      <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
+        <PlanCard
+          title={plan.title}
+          price={plan.price}
+          details={plan.details}
+          onPurchase={() => handlePurchase(plan.title)}
+        />
+      </div>
     ));
   };
 
@@ -54,9 +55,10 @@ const PurchasePlan: React.FC = () => {
           </div>
         </div>
         <div className="row mt-4">
-          {activeTab === "Residential" && renderCards(residentialPlans)}
-          {activeTab === "Bandwidth" && renderCards(bandwidthPlans)}
-        </div>
+  {activeTab === "Residential" && renderCards(residentialPlans)}
+  {activeTab === "Bandwidth" && renderCards(bandwidthPlans)}
+</div>
+
       </div>
     </Layout>
   );

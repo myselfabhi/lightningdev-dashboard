@@ -99,9 +99,9 @@ const CardsSection: React.FC<CardsSectionProps> = ({
             </div>
             <h5 className="card-title">Data Left</h5>
             <h4 className="card-value">{dataLeft.toFixed(2)} GB</h4>
-            <div className="progress-circle mt-2">
+            {/* <div className="progress-circle mt-2">
               <strong>{dataLeftPercentage}%</strong>
-            </div>
+            </div> */}
             <hr />
             <p className="text-muted">
               Total Data Purchased: {totalDataPurchased.toFixed(2)} GB
