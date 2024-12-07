@@ -1,6 +1,8 @@
 import axios from "axios";
+require('dotenv').config();
 
-const API_KEY = "8U30N2d2qBzUW";
+const API_KEY = process.env.API_KEY;
+
 const BASE_URL = "https://developer-tester.lightningproxies.net/api";
 
 // Create User Residential
