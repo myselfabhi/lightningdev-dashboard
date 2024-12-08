@@ -1,0 +1,203 @@
+.checkoutPage {
+    margin-top: 20px;
+  }
+  
+  .checkoutContainer {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .subtitle {
+    text-align: center;
+    font-size: 20px;
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+  
+  .planDetails {
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .planTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .planDescription {
+    color: #6c757d;
+    margin-bottom: 15px;
+  }
+  
+  .detailsTable {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .detailsTable td:first-child {
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .detailsTable td:last-child {
+    text-align: right;
+  }
+  
+  .blueHr {
+    border: none;
+    border-top: 2px solid #007bff;
+    margin: 10px 0;
+  }
+  
+  .paymentForm {
+    margin-top: 20px;
+  }
+  
+  .couponSection {
+    margin-bottom: 20px;
+  }
+  
+  .couponInput {
+    display: flex;
+  }
+  
+  .couponInput input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .applyButton {
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  
+  .selectFields {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .select,
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .paymentMethods {
+    margin-bottom: 20px;
+  }
+  
+  .radioGroup {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .radioGroup label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .stripeFee {
+    color: #007bff;
+  }
+  
+  .totalSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .totalPrice {
+    font-weight: bold;
+  }
+  
+  .payButton {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  .payButton.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .warning {
+    margin-top: 20px;
+    background: #f4cb99;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .cryptoSupport {
+    margin-top: 30px;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .cryptoList {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .cryptoList ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cryptoList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .cryptoList img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .footerLogos {
+    display: flex;
+    margin-left: 250px;
+    height: 30px;
+    width: 30px;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
