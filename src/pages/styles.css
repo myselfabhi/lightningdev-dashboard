@@ -315,9 +315,7 @@
 
 /* Navbar Container */
 .navbar-container {
-	background-color: #f5f6f9;
-	/* margin-left: 50px;
-  margin-right: 70px; */
+	background-color: #F5F7F8;
 	font-size: 14px;
 	height: 100px;
 	display: flex;
@@ -326,26 +324,23 @@
 	padding: 0 20px;
 	position: absolute;
 	top: 0;
-	left: 305px; /* Adjust for sidebar width */
-	right: 0;
+	left: 350px; /* Adjust for sidebar width */
+	right: 100px;
 	z-index: 1050;
 }
 
 /* Home Icon */
 .navbar-container .home-icon {
 	display: flex;
+	background-color: white;
 	align-items: center;
 	justify-content: center;
 	border-radius: 6px;
 	width: 40px;
 	height: 40px;
-	margin-right: 10px;
 }
 
-.navbar-container .home-icon i {
-	font-size: 20px;
-	color: #6c757d;
-}
+
 
 /* Theme Toggle */
 .navbar-container .theme-toggle {
@@ -409,8 +404,9 @@
 	align-items: center;
 	justify-content: center;
 	background-color: #eaf8eb;
-	border: 1px solid #6ac18d;
+	border: 2px solid #6ac18d;
 	border-radius: 6px;
+	border-color: #28a745;
 	width: 150px;
 	height: 40px;
 	margin-right: 10px;
@@ -434,6 +430,7 @@
 /* Date & Time */
 .navbar-container .date-time {
 	display: flex;
+	padding: 0 6px;
 	align-items: center;
 	justify-content: center;
 	background-color: #ffffff;
@@ -446,13 +443,13 @@
 
 .navbar-container .date-time i {
 	font-size: 16px;
-	color: #007bff;
+	color: black;
 	margin-right: 8px;
 }
 
 .navbar-container .date-time span {
 	font-size: 14px;
-	color: #6c757d;
+	color: black;
 }
 
 /* User Profile */

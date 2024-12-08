@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
 				{/* Left Section */}
 				<div className="d-flex align-items-center">
 					<div className="home-icon">
-						<i className="fas fa-home"></i>
+          <img src="https://lightningproxies.net/assets/images/icons/breadcumb.svg" alt="Home Icon"/>
 					</div>
 				</div>
 
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
 					{/* Balance */}
 					<div className="balance-container me-3">
 						<button className="btn">
-							<i className="fas fa-wallet"></i> Balance: $0
+							<i className="fas fa-wallet"></i> Balance: $0 
 						</button>
 					</div>
 
