@@ -1,0 +1,155 @@
+.planSection {
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .subtitle {
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  .filter {
+    background: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .giftSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .giftInput {
+    width: 200px;
+    height: 40px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 10px;
+  }
+  
+  .giftButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #DCE9F8;
+    color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 6px;
+    padding: 7px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .giftButton:hover {
+    background: #0056b3;
+  }
+  
+  .giftIcon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .helpText {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.875rem;
+    color: #6c757d;
+  }
+  
+  .bookIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .planCard {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #eaecef;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .progressContainer {
+    margin-right: 20px;
+  }
+  
+  .circularProgress {
+    display: block;
+  }
+  
+  .planDetails {
+    flex: 1;
+  }
+  
+  .planTitle {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .planDescription {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin: 10px 0;
+  }
+  
+  .separator {
+    border: none;
+    border-top: 2px solid #007bff;
+    margin: 10px 0;
+  }
+  
+  .planMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .metaGroup {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .metaLabel {
+    color: #6c757d;
+    font-size: 0.875rem;
+  }
+  
+  .generateButton {
+    background: #E4F2FF;
+    color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .generateButton:hover {
+    background: #cce4ff;
+  }
+  

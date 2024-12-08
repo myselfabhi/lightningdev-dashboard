@@ -943,88 +943,71 @@
 }
 
 .plan-section {
-    margin-top: 10px;
+	margin-top: 20px;
   }
-
-.section-title {
-    font-size: 18px;
-    font-weight: bold;
+  
+  .section-title {
+	font-size: 24px;
+	font-weight: bold;
   }
   
   .section-subtitle {
-    font-size: 14px;
-    color: #6c757d;
-  }
-  
-  .gift-code-container {
-    display: flex;
-    align-items: center;
+	font-size: 14px;
+	color: #6c757d;
   }
   
   .gift-code-input {
-    flex-grow: 1;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    padding: 0.5rem;
+	max-width: 200px;
   }
   
   .gift-code-btn {
-    white-space: nowrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
   }
   
-  .gift-help-text {
-    font-size: 14px;
-    color: #6c757d;
+  .book-icon {
+	width: 16px;
+	height: 16px;
   }
   
-  .plan-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+  .filter-btn img {
+	width: 16px;
+	height: 16px;
+  }
+  
+  .plan-bg {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
   }
   
   .progress-circle-container {
-    flex-shrink: 0;
-  }
-  
-  .progress-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: bold;
+	flex-shrink: 0;
   }
   
   .plan-title {
-    font-size: 16px;
-    font-weight: bold;
+	font-size: 16px;
+	font-weight: bold;
   }
   
   .plan-description {
-    font-size: 14px;
-    color: #6c757d;
+	font-size: 14px;
+	color: #6c757d;
   }
   
   .plan-meta {
-    font-size: 14px;
+	font-size: 14px;
+	color: #333;
   }
   
   .btn-generate-proxy {
-    white-space: nowrap;
+	white-space: nowrap;
   }
   
-  .filter-btn {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
   
 
 .sidebar-wrapper {
