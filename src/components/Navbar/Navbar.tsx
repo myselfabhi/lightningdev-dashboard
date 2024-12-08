@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
 	}, [])
 
 	return (
-		<div className="container-fluid navbar-wrapper">
+		<div className=" navbar-wrapper">
 			<nav className="navbar-container align-items-center justify-content-between">
 				{/* Left Section */}
 				<div className="d-flex align-items-center">
@@ -43,9 +43,9 @@ const Navbar: React.FC = () => {
 				</div>
 
 				{/* Right Section */}
-				<div className="d-flex align-items-center">
+				<div className="d-flex">
 					{/* Theme Toggle */}
-					<div className="theme-toggle me-3">
+					<div className="theme-toggle">
 						<div className="theme-toggle-container">
 							<img src="https://lightningproxies.net/assets/images/icons/moon.svg" alt="Moon Icon" className="theme-icon" />
 							<label className="switch">
@@ -57,20 +57,20 @@ const Navbar: React.FC = () => {
 					</div>
 
 					{/* Balance */}
-					<div className="balance-container me-3">
+					<div className="balance-container ">
 						<button className="btn">
 							<i className="fas fa-wallet"></i> Balance: $0 
 						</button>
 					</div>
 
 					{/* Date & Time */}
-					<div className="date-time me-3">
+					<div className="date-time ">
 						<i className="fas fa-calendar-alt"></i>
 						<span>{currentDateTime}</span>
 					</div>
 
 					{/* User Profile */}
-					<div className="user-profile me-3">
+					<div className="user-profile ">
 						<button className="btn">
 							<i className="fas fa-user"></i> Abhinav_xLWnFL
 						</button>
