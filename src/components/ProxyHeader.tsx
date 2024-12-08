@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Circle } from 'rc-progress';
+import { Home, Calendar, Database } from 'lucide-react';
 import styles from './ProxyHeader.module.css';
 
 type ProxyHeaderProps = {
@@ -9,27 +10,10 @@ type ProxyHeaderProps = {
   totalBandwidth: number; // in GB
   usedBandwidth: number; // in GB
   remainingBandwidth: number; // in GB
-  addGigabytes: (gb: number) => void; // Function for Add Bandwidth button
 };
 
-const ProxyHeader: React.FC<ProxyHeaderProps> = ({
-  planId,
-  currentPlan,
-  planExpiry,
-  totalBandwidth,
-  usedBandwidth,
-  remainingBandwidth,
-  addGigabytes,
-}) => {
+const ProxyHeader: React.FC<ProxyHeaderProps> = ({ planId, currentPlan, planExpiry, totalBandwidth, usedBandwidth, remainingBandwidth }) => {
   const progress = (usedBandwidth / totalBandwidth) * 100;
-  const [addGB, setAddGB] = useState<number>(0);
-
-  const handleAddClick = () => {
-    if (addGB > 0) {
-      addGigabytes(addGB);
-      setAddGB(0); // Reset input after adding
-    }
-  };
 
   return (
     <div className={styles.proxyHeaderContainer}>
@@ -50,11 +34,7 @@ const ProxyHeader: React.FC<ProxyHeaderProps> = ({
         {/* Current Plan Card */}
         <div className={styles.card}>
           <div className={styles.iconContainer}>
-            <img
-              src="https://lightningproxies.net/assets/images/icons/qube.svg"
-              alt="Current Plan Icon"
-              className={styles.icon}
-            />
+            <Home size={20} className={styles.icon} />
           </div>
           <p className={styles.cardTitle}>Current Plan</p>
           <h5>{currentPlan}</h5>
@@ -64,11 +44,7 @@ const ProxyHeader: React.FC<ProxyHeaderProps> = ({
         {/* Plan Expiry Card */}
         <div className={styles.card}>
           <div className={styles.iconContainer}>
-            <img
-              src="https://lightningproxies.net/assets/images/icons/date-w.svg"
-              alt="Plan Expiry Icon"
-              className={styles.icon}
-            />
+            <Calendar size={20} className={styles.icon} />
           </div>
           <p className={styles.cardTitle}>Plan Expiry</p>
           <h5>{planExpiry}</h5>
@@ -77,11 +53,7 @@ const ProxyHeader: React.FC<ProxyHeaderProps> = ({
         {/* Total Bandwidth Card */}
         <div className={styles.card}>
           <div className={styles.iconContainer}>
-            <img
-              src="https://lightningproxies.net/assets/images/icons/quee.svg"
-              alt="Total Bandwidth Icon"
-              className={styles.icon}
-            />
+            <Database size={20} className={styles.icon} />
           </div>
           <p className={styles.cardTitle}>Total Bandwidth</p>
           <h5>{totalBandwidth.toFixed(2)} GB</h5>
@@ -107,12 +79,8 @@ const ProxyHeader: React.FC<ProxyHeaderProps> = ({
               type="number"
               className={styles.bandwidthInput}
               placeholder="0"
-              value={addGB}
-              onChange={(e) => setAddGB(Number(e.target.value))}
             />
-            <button className={styles.addButton} onClick={handleAddClick}>
-              Add
-            </button>
+            <button className={styles.addButton}>Add</button>
           </div>
         </div>
       </div>
