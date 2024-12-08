@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './PlanSection.module.css';
 import { FaFilter } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 type Plan = {
   id: string;
@@ -11,6 +12,7 @@ type Plan = {
 };
 
 const PlanSection: React.FC = () => {
+  const router = useRouter();
   const [plans, setPlans] = useState<Plan[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error] = useState<string | null>(null);
@@ -30,6 +32,10 @@ const PlanSection: React.FC = () => {
       setLoading(false);
     }, 1000);
   }, []);
+
+  const handleGenerateProxy = (planId: string) => {
+    router.push(`/generate-proxy?planId=${planId}`);
+  };
 
   return (
     <div className={styles.planSection}>
@@ -141,7 +147,7 @@ const PlanSection: React.FC = () => {
                   <p className={styles.metaLabel}>Expires</p>
                   <h6>{plan.expires}</h6>
                 </div>
-                              <button className={styles.generateButton}>
+                              <button onClick={() => handleGenerateProxy(plan.id)} className={styles.generateButton}>
                 Generate Proxy →
               </button>
               </div>
