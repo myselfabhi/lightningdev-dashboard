@@ -386,7 +386,7 @@ const SubUsersManagementPage: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.header}>
           <h5>Sub-users management</h5>
-          <p>Empower your team's efficiency with seamless sub-user management.</p>
+          <p>Empower your teams efficiency with seamless sub-user management.</p>
         </div>
         <div className={styles.card}>
           <select
