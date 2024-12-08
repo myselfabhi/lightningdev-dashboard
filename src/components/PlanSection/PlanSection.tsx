@@ -13,7 +13,7 @@ type Plan = {
 const PlanSection: React.FC = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
 
   useEffect(() => {
     // Mock data fetching
