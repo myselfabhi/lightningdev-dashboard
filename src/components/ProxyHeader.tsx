@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Circle } from 'rc-progress';
-import { Home, Calendar, Database } from 'lucide-react';
+import styles from './ProxyHeader.module.css';
 
 type ProxyHeaderProps = {
   planId: string;
@@ -9,81 +9,110 @@ type ProxyHeaderProps = {
   totalBandwidth: number; // in GB
   usedBandwidth: number; // in GB
   remainingBandwidth: number; // in GB
+  addGigabytes: (gb: number) => void; // Function for Add Bandwidth button
 };
 
-const ProxyHeader: React.FC<ProxyHeaderProps> = ({ planId, currentPlan, planExpiry, totalBandwidth, usedBandwidth, remainingBandwidth }) => {
+const ProxyHeader: React.FC<ProxyHeaderProps> = ({
+  planId,
+  currentPlan,
+  planExpiry,
+  totalBandwidth,
+  usedBandwidth,
+  remainingBandwidth,
+  addGigabytes,
+}) => {
   const progress = (usedBandwidth / totalBandwidth) * 100;
+  const [addGB, setAddGB] = useState<number>(0);
+
+  const handleAddClick = () => {
+    if (addGB > 0) {
+      addGigabytes(addGB);
+      setAddGB(0); // Reset input after adding
+    }
+  };
 
   return (
-    <div className="proxy-header-container">
+    <div className={styles.proxyHeaderContainer}>
       {/* Header */}
-      <div className="proxy-header-top d-flex justify-content-between align-items-center mb-3">
+      <div className={styles.proxyHeaderTop}>
         <div>
           <h4>Generate Proxy</h4>
-          <p className="plan-id">Plan ID: {planId}</p>
+          <p className={styles.planId}>Plan ID: {planId}</p>
         </div>
         <div>
-          <span className="support-text me-2">Need Support?</span>
-          <button className="btn btn-primary">Contact Us</button>
+          <span className={styles.supportText}>Need Support?</span>
+          <button className={styles.contactButton}>Contact Us</button>
         </div>
       </div>
 
-      {/* Plan Details */}
-      <div className="d-flex gap-3 mb-4">
-        <div className="card shadow-sm p-3 flex-grow-1 position-relative">
-          <div className="icon-container mb-2">
-            <Home size={20} className="icon" />
+      {/* Cards Section */}
+      <div className={styles.cardsContainer}>
+        {/* Current Plan Card */}
+        <div className={styles.card}>
+          <div className={styles.iconContainer}>
+            <img
+              src="https://lightningproxies.net/assets/images/icons/qube.svg"
+              alt="Current Plan Icon"
+              className={styles.icon}
+            />
           </div>
-          <p className="card-title">Current Plan</p>
+          <p className={styles.cardTitle}>Current Plan</p>
           <h5>{currentPlan}</h5>
-          <button className="btn btn-outline-primary btn-sm plan-settings-btn position-absolute">Plan Settings</button>
+          <button className={styles.planSettingsButton}>Plan Settings</button>
         </div>
-        <div className="card shadow-sm p-3 flex-grow-1">
-          <div className="icon-container mb-2">
-            <Calendar size={20} className="icon" />
+
+        {/* Plan Expiry Card */}
+        <div className={styles.card}>
+          <div className={styles.iconContainer}>
+            <img
+              src="https://lightningproxies.net/assets/images/icons/date-w.svg"
+              alt="Plan Expiry Icon"
+              className={styles.icon}
+            />
           </div>
-          <p className="card-title">Plan Expiry</p>
+          <p className={styles.cardTitle}>Plan Expiry</p>
           <h5>{planExpiry}</h5>
         </div>
-      </div>
 
-      {/* Bandwidth Information */}
-      <div className="card shadow-sm p-4">
-        <div className="d-flex align-items-center">
-          {/* Total Bandwidth */}
-          <div className="bandwidth-info me-4">
-            <div className="icon-container mb-2">
-              <Database size={20} className="icon" />
-            </div>
-            <p className="card-title">Total Bandwidth</p>
-            <h5>{totalBandwidth.toFixed(2)} GB</h5>
+        {/* Total Bandwidth Card */}
+        <div className={styles.card}>
+          <div className={styles.iconContainer}>
+            <img
+              src="https://lightningproxies.net/assets/images/icons/quee.svg"
+              alt="Total Bandwidth Icon"
+              className={styles.icon}
+            />
           </div>
-
-          {/* Circular Progress */}
-          <div className="progress-circle me-4">
-            <Circle percent={progress} strokeWidth={8} strokeColor="#007bff" trailColor="#e9ecef" />
-            <div className="progress-text">{`${progress.toFixed(0)}%`}</div>
+          <p className={styles.cardTitle}>Total Bandwidth</p>
+          <h5>{totalBandwidth.toFixed(2)} GB</h5>
+          <div className={styles.progressCircleContainer}>
+            <Circle
+              percent={progress}
+              strokeWidth={8}
+              strokeColor="#007bff"
+              trailColor="#e9ecef"
+            />
+            <div className={styles.progressText}>{`${progress.toFixed(0)}%`}</div>
           </div>
-
-          {/* Bandwidth Usage */}
-          <div className="bandwidth-summary me-4">
-            <div className="d-flex align-items-center mb-2">
-              <span className="dot used-dot me-2"></span>
-              <p className="mb-0">Used Bandwidth</p>
+          <div className={styles.bandwidthDetails}>
+            <div>
+              <span className={styles.usedDot}></span> Used Bandwidth: {usedBandwidth.toFixed(2)} GB
             </div>
-            <div className="d-flex align-items-center">
-              <span className="dot remaining-dot me-2"></span>
-              <p className="mb-0">Remaining Bandwidth</p>
+            <div>
+              <span className={styles.remainingDot}></span> Remaining Bandwidth: {remainingBandwidth.toFixed(2)} GB
             </div>
           </div>
-
-          {/* Bandwidth Values */}
-          <div className="bandwidth-values text-end">
-            <p className="mb-2">{usedBandwidth.toFixed(2)} GB</p>
-            <p>{remainingBandwidth.toFixed(2)} GB</p>
-            <p>
-              <button className="btn btn-primary ms-3 add-button">Add &gt;</button>
-            </p>
+          <div className={styles.addBandwidth}>
+            <input
+              type="number"
+              className={styles.bandwidthInput}
+              placeholder="0"
+              value={addGB}
+              onChange={(e) => setAddGB(Number(e.target.value))}
+            />
+            <button className={styles.addButton} onClick={handleAddClick}>
+              Add
+            </button>
           </div>
         </div>
       </div>

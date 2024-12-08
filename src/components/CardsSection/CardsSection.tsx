@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from "react";
 import {
   FaDollarSign,
   FaShoppingCart,
@@ -8,8 +8,8 @@ import {
   FaEnvelope,
   FaInfoCircle,
   FaTrash,
-} from 'react-icons/fa';
-import Popup from './Popup';
+} from "react-icons/fa";
+import styles from "./CardsSection.module.css";
 
 type CardsSectionProps = {
   addBalance: () => Promise<void>;
@@ -33,116 +33,98 @@ const CardsSection: React.FC<CardsSectionProps> = ({
   username,
   userId,
 }) => {
-  const [isPopupVisible, setPopupVisible] = useState(false);
-
-  const handleReadMoreClick = () => {
-    setPopupVisible(true);
-  };
-
-  const closePopup = () => {
-    setPopupVisible(false);
-  };
+  const dataPercentage = ((dataLeft / totalDataPurchased) * 100).toFixed(0);
 
   return (
-    <div className="cards-section container">
+    <div className={styles.cardsSection}>
       {/* Welcome Section */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className={styles.welcomeSection}>
         <div>
-          <h4 className="mb-2">Welcome {username}</h4>
-          <p className="text-muted">Welcome back, we&apos;re glad to have you.</p>
+          <h4 className={styles.welcomeTitle}>Welcome {username}</h4>
+          <p className={styles.welcomeSubtitle}>
+            Welcome back, we're glad to have you.
+          </p>
         </div>
-        <button
-          className="btn btn-light shadow-sm read-more-btn d-flex align-items-center"
-          onClick={handleReadMoreClick}
-        >
+        <button className={styles.readMoreBtn}>
           <img
             src="https://lightningproxies.net/assets/images/icons/pin.svg"
             alt="Pin Icon"
-            className="me-2"
+            className={styles.pinIcon}
           />
-          <span className="text-muted">Residential State/City Targeting. </span>
-          <strong>Read More &gt;</strong>
+          <span>Residential State/City Targeting</span>
+          <strong className={styles.readMoreLink}>Read More &gt;</strong>
         </button>
       </div>
 
       {/* Cards Section */}
-      <div className="row g-4">
+      <div className={styles.cardsGrid}>
         {/* Active Balance */}
-        <div className="col-12 col-md-6 col-lg-5">
-          <div className="card custom-card">
-            <div className="icon-style">
-              <FaDollarSign />
-            </div>
-            <h5 className="card-title">Active Balance</h5>
-            <h4 className="card-value">${balance.toFixed(2)}</h4>
-            <button className="btn btn-outline-success" onClick={addBalance}>
-              Add Balance
-            </button>
-            <hr />
-            <p className="text-muted">Total Balance Spent: $0.00</p>
+        <div className={styles.card}>
+          <div className={styles.iconContainer}>
+            <FaDollarSign className={styles.icon} />
           </div>
+          <p className={styles.cardTitle}>Active Balance</p>
+          <h4 className={styles.cardValue}>${balance.toFixed(2)}</h4>
+          <button className={styles.addBalanceBtn} onClick={addBalance}>
+            Add Balance
+          </button>
+          <hr className={styles.cardDivider} />
+          <p className={styles.cardFooter}>Total Balance Spent: $0.00</p>
         </div>
 
         {/* Active Plans */}
-        <div className="col-12 col-md-6 col-lg-5">
-          <div className="card custom-card">
-            <div className="icon-style">
-              <FaShoppingCart />
-            </div>
-            <h5 className="card-title">Active Plans</h5>
-            <h4 className="card-value">{activePlans}</h4>
-            <button className="btn btn-outline-primary" onClick={renewPlan}>
-              Purchase Plan
-            </button>
-            <hr />
-            <p className="text-muted">Total Purchased Plans: {activePlans}</p>
+        <div className={styles.card}>
+          <div className={styles.iconContainer}>
+            <FaShoppingCart className={styles.icon} />
           </div>
+          <p className={styles.cardTitle}>Active Plans</p>
+          <h4 className={styles.cardValue}>{activePlans}</h4>
+          <button className={styles.purchasePlanBtn} onClick={renewPlan}>
+            Purchase Plan
+          </button>
+          <hr className={styles.cardDivider} />
+          <p className={styles.cardFooter}>Total Purchased Plans: {activePlans}</p>
         </div>
 
         {/* Data Left */}
-        <div className="col-12 col-md-6 col-lg-5">
-          <div className="card custom-card">
-            <div className="icon-style">
-              <FaServer />
-            </div>
-            <div data-test-id="CircularProgressbarWithChildren__children" className="text-center">
-              <h5 className="card-title">Data Left</h5>
-              <h4 className="card-value">
-                {((dataLeft / totalDataPurchased) * 100).toFixed(0)}%
-              </h4>
-              <p className="text-muted">Total Data Purchased: {totalDataPurchased.toFixed(2)} GB</p>
-            </div>
+        <div className={styles.card}>
+          <div className={styles.iconContainer}>
+            <FaServer className={styles.icon} />
           </div>
+          <p className={styles.cardTitle}>Data Left</p>
+          <div className={styles.circularProgress}>
+            <div className={styles.circularText}>{dataPercentage}%</div>
+          </div>
+          <h4 className={styles.cardValue}>{dataLeft.toFixed(2)} GB</h4>
+          <hr className={styles.cardDivider} />
+          <p className={styles.cardFooter}>
+            Total Data Purchased: {totalDataPurchased.toFixed(2)} GB
+          </p>
         </div>
 
         {/* User Profile */}
-        <div className="col-12 col-md-6 col-lg-5">
-          <div className="card custom-card text-center">
-            <div className="icon-style-4">
-              <FaUser />
-            </div>
-            <h5 className="card-title">{username}</h5>
-            <p className="text-muted">{userId}</p>
-            <div className="d-flex justify-content-center gap-3">
-              <button className="btn btn-outline-success" title="Shield">
-                <FaShieldAlt />
-              </button>
-              <button className="btn btn-outline-primary" title="Email">
-                <FaEnvelope />
-              </button>
-              <button className="btn btn-outline-secondary" title="Info">
-                <FaInfoCircle />
-              </button>
-              <button className="btn btn-outline-danger" title="Delete">
-                <FaTrash />
-              </button>
-            </div>
+        <div className={styles.card}>
+          <div className={styles.iconContainer}>
+            <FaUser className={styles.icon} />
+          </div>
+          <p className={styles.cardTitle}>{username}</p>
+          <p className={styles.cardFooter}>{userId}</p>
+          <div className={styles.userActions}>
+            <button className={styles.actionBtn} title="Shield">
+              <FaShieldAlt />
+            </button>
+            <button className={styles.actionBtn} title="Email">
+              <FaEnvelope />
+            </button>
+            <button className={styles.actionBtn} title="Info">
+              <FaInfoCircle />
+            </button>
+            <button className={styles.actionBtnDanger} title="Delete">
+              <FaTrash />
+            </button>
           </div>
         </div>
       </div>
-
-      {/* Popup */}
-      {isPopupVisible && <Popup onClose={closePopup} />}
     </div>
   );
 };

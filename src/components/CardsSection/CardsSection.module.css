@@ -1,0 +1,177 @@
+.cardsSection {
+    padding: 20px;
+  }
+  
+  .welcomeSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .welcomeTitle {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .welcomeSubtitle {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .readMoreBtn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .pinIcon {
+    margin-right: 8px;
+  }
+  
+  .readMoreLink {
+    color: #007bff;
+    margin-left: 4px;
+  }
+  
+  .cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eef6ff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 16px;
+  }
+  
+  .icon {
+    font-size: 24px;
+    color: #007bff;
+  }
+  
+  .cardTitle {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 8px;
+  }
+  
+  .cardValue {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  
+  .addBalanceBtn,
+  .purchasePlanBtn {
+    background: transparent;
+    border: 1px solid;
+    border-radius: 16px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .addBalanceBtn {
+    color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .addBalanceBtn:hover {
+    background: #28a745;
+    color: #fff;
+  }
+  
+  .purchasePlanBtn {
+    color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .purchasePlanBtn:hover {
+    background: #007bff;
+    color: #fff;
+  }
+  
+  .cardDivider {
+    margin: 16px 0;
+    border: 0.5px solid #e9ecef;
+  }
+  
+  .cardFooter {
+    font-size: 12px;
+    color: #6c757d;
+  }
+  
+  .circularProgress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    border: 8px solid #007bff;
+    position: relative;
+  }
+  
+  .circularText {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+    position: absolute;
+  }
+  
+  .userActions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  
+  .actionBtn {
+    background: #eef6ff;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .actionBtn:hover {
+    background: #007bff;
+    color: #fff;
+  }
+  
+  .actionBtnDanger {
+    background: #fbe3e3;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    color: #dc3545;
+    cursor: pointer;
+  }
+  
+  .actionBtnDanger:hover {
+    background: #dc3545;
+    color: #fff;
+  }
+  

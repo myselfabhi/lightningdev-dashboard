@@ -1,0 +1,143 @@
+.proxyHeaderContainer {
+    padding: 20px;
+    background-color: #f9fafe;
+  }
+  
+  .proxyHeaderTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .planId {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .supportText {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .contactButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .cardsContainer {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .card {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    flex: 1;
+    position: relative;
+  }
+  
+  .iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eef6ff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+  }
+  
+  .icon {
+    color: #007bff;
+  }
+  
+  .cardTitle {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .planSettingsButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .progressCircleContainer {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+  }
+  
+  .progressText {
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .bandwidthDetails {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+  
+  .usedDot,
+  .remainingDot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .usedDot {
+    background-color: #007bff;
+  }
+  
+  .remainingDot {
+    background-color: #6c757d;
+  }
+  
+  .addBandwidth {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  .bandwidthInput {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    margin-right: 8px;
+    font-size: 14px;
+  }
+  
+  .addButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
