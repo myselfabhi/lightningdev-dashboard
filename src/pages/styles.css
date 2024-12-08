@@ -771,7 +771,7 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease;
 	flex: 1 1 calc(25% - 20px);
-	max-width: 300px;
+	width: 600px;
 }
 
 .plan-card:hover {
@@ -808,7 +808,7 @@
 
 @media (max-width: 1024px) {
 	.plan-card {
-		flex: 1 1 calc(20% - 10px); /* Three cards per row on medium screens */
+		flex: 1 1 calc(20% - 10px);
 	}
 }
 

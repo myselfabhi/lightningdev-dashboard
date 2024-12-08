@@ -14,7 +14,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ title, price, details }) => {
   const handlePurchase = () => {
     router.push({
       pathname: '/checkout',
-      query: { title, price }, // Pass plan details as query parameters
+      query: { title, price }, 
     });
   };
 
