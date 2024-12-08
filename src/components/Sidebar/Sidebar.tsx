@@ -1,5 +1,4 @@
 import { Home, ShoppingCart, Wallet, FileText, Server, Users, Globe, ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
 import { useState } from 'react';
 
 const Sidebar = () => {
@@ -18,58 +17,59 @@ const Sidebar = () => {
           <ChevronLeft size={18} className={`toggle-icon ${isSidebarOpen ? '' : 'rotate'}`} />
         </button>
       </div>
+      <hr />
 
       {/* Main Menu */}
       <div className="menu-set">
         <h6 className="menu-heading">MAIN MENU</h6>
         <ul className="menu">
           <li className="menu-item">
-            <Link href="/">
-              <div className="menu-link">
+            <a className='menu-link' href="/">
+              <div>
                 <Home size={18} className="menu-icon" />
                 <span>Dashboard</span>
               </div>
-            </Link>
+            </a>
           </li>
           <li className="menu-item">
-            <Link href="/purchase-plan">
-              <div className="menu-link">
+            <a className='menu-link' href="/purchase-plan">
+              <div>
                 <ShoppingCart size={18} className="menu-icon" />
                 <span>Purchase Plan</span>
               </div>
-            </Link>
+            </a>
           </li>
           <li className="menu-item">
-            <Link href="/deposit-balance">
-              <div className="menu-link">
+            <a className='menu-link' href="/deposit-balance">
+              <div>
                 <Wallet size={18} className="menu-icon" />
                 <span>Deposit Balance</span>
               </div>
-            </Link>
+            </a>
           </li>
           <li className="menu-item">
-            <Link href="/invoices">
-              <div className="menu-link">
+            <a className='menu-link' href="/invoices">
+              <div>
                 <FileText size={18} className="menu-icon" />
                 <span>Invoices</span>
               </div>
-            </Link>
+            </a>
           </li>
           <li className="menu-item">
-            <Link href="/proxy-usage-log">
-              <div className="menu-link">
+            <a className='menu-link' href="/proxy-usage-log">
+              <div>
                 <Server size={18} className="menu-icon" />
                 <span>Proxy Usage Log</span>
               </div>
-            </Link>
+            </a>
           </li>
           <li className="menu-item">
-            <Link href="/sub-users-management">
-              <div className="menu-link">
+            <a className='menu-link' href="/sub-users-management">
+              <div>
                 <Users size={18} className="menu-icon" />
                 <span>Sub-Users</span>
               </div>
-            </Link>
+            </a>
           </li>
         </ul>
       </div>
@@ -79,20 +79,20 @@ const Sidebar = () => {
         <h6 className="menu-heading">RESELLER</h6>
         <ul className="menu">
           <li className="menu-item">
-            <Link href="/reseller-dashboard">
-              <div className="menu-link">
+            <a className='menu-link' href="/reseller-dashboard">
+              <div>
                 <Globe size={18} className="menu-icon" />
                 <span>Dashboard</span>
               </div>
-            </Link>
+            </a>
           </li>
           <li className="menu-item">
-            <Link href="/api-docs">
-              <div className="menu-link">
+            <a className='menu-link' href="/api-docs">
+              <div>
                 <Globe size={18} className="menu-icon" />
                 <span>API Docs</span>
               </div>
-            </Link>
+            </a>
           </li>
         </ul>
       </div>
@@ -102,13 +102,13 @@ const Sidebar = () => {
         <h6 className="menu-heading">CONNECT WITH US</h6>
         <ul className="menu">
           <li className="menu-item">
-            <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" className="menu-link">
+            <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" className='menu-link'>
               <img src="https://lightningproxies.net/assets/images/sidebar-icons/social-03.svg" alt="Discord" className="menu-icon" />
               <span>Join Discord Server</span>
             </a>
           </li>
           <li className="menu-item">
-            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="menu-link">
+            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className='menu-link'>
               <img src="https://lightningproxies.net/assets/images/sidebar-icons/social-01.svg" alt="Telegram" className="menu-icon" />
               <span>Join Telegram Channel</span>
             </a>
