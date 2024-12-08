@@ -1,0 +1,167 @@
+.InvoiceHeader {
+    margin-top: 10px;
+  }
+  
+  .invoicesContainer {
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .subtitle {
+    font-size: 0.875rem;
+    color: #6c757d;
+  }
+  
+  .contactButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  
+  .contactButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .searchBar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 6px;
+    padding: 5px 10px;
+    gap: 10px;
+  }
+  
+  .searchIcon {
+    color: #007bff;
+  }
+  
+  .searchInput {
+    border: none;
+    outline: none;
+    font-size: 0.875rem;
+    width: 1000px;
+  }
+  
+  .filterButtons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sortLabel {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-right: 10px;
+  }
+  
+  .filterButton {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    margin-left: 10px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .unpaid {
+    background-color: rgba(220, 53, 69, 0.5);
+    color: #dc3545;
+  }
+  
+  .paid {
+    background-color: rgba(40, 167, 69, 0.5);
+    color: #28a745;
+  }
+  
+  .active {
+    border: 1px solid #000;
+  }
+  
+  .blueHr {
+    border: none;
+    border-top: 2px solid #007bff;
+    margin: 10px 0;
+  }
+  
+  .tableContainer {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    text-align: left;
+    padding: 12px;
+    font-size: 0.875rem;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+    color: #6c757d;
+  }
+  
+  .table td {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .status {
+    color: #007bff;
+    background-color: #eef6ff;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  
+  .paymentStatus {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+  }
+  
+  .paidStatus {
+    background-color: #d4edda;
+    color: #29ab48;
+  }
+  
+  .unpaidStatus {
+    background-color: #f8d7da;
+    color: #d7727c;
+  }
+  
+  .noInvoices {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.875rem;
+  }
+  
