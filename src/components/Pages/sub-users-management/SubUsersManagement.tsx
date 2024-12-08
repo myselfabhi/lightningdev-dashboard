@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { createUserResidential, addGigabytes, removeGigabytes } from '@/src/services/apiService';
+import { addGigabytes, createUserResidential, removeGigabytes } from '@/src/services/apiService';
 import DashboardLayout from '../../DashboardLayout/DashboardLayout';
+import styles from './SubUserManagement.module.css';
 
 type Username = {
   id: string;
@@ -105,52 +106,78 @@ const SubUsersManagementPage: React.FC = () => {
     toast.success('User deleted successfully.');
   };
 
+
   const handleAddGigabytes = async () => {
     if (!selectedUsername || gbToAdd <= 0) {
       toast.error('Please select a username and provide a valid GB value to add.');
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
-      const flow = 1;
-      const response = await addGigabytes(selectedUsername, flow, gbToAdd);
+      const flow = 1; // Ensure flow is valid (1 or 2)
+      const duration = 3; // Ensure duration is 3
+      const response = await addGigabytes(selectedUsername, flow, duration);
       console.log('Add Gigabytes Response:', response);
-
+  
+      // Update the bandwidth for the selected user
+      setUsernames((prev) =>
+        prev.map((user) =>
+          user.name === selectedUsername
+            ? {
+                ...user,
+                bandwidth: user.bandwidth + gbToAdd,
+                bandwidthLeft: `${user.bandwidth + gbToAdd} GB`,
+              }
+            : user
+        )
+      );
+  
       toast.success(`Successfully added ${gbToAdd} GB to ${selectedUsername}`);
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Error in Add Gigabytes:', error.message);
-        toast.error('Failed to add gigabytes.');
-      }
+      console.error('Error in Add Gigabytes:', error);
+      toast.error('Failed to add gigabytes.');
     } finally {
       setLoading(false);
     }
   };
-
+  
+  
   const handleRemoveGigabytes = async () => {
     if (!selectedUsername || gbToRemove <= 0) {
       toast.error('Please select a username and provide a valid GB value to remove.');
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
       const response = await removeGigabytes(selectedUsername, gbToRemove);
       console.log('Remove Gigabytes Response:', response);
-
+  
+      // Update the bandwidth for the selected user
+      setUsernames((prev) =>
+        prev.map((user) =>
+          user.name === selectedUsername
+            ? {
+                ...user,
+                bandwidth: Math.max(0, user.bandwidth - gbToRemove),
+                bandwidthLeft: `${Math.max(0, user.bandwidth - gbToRemove)} GB`,
+              }
+            : user
+        )
+      );
+  
       toast.success(`Successfully removed ${gbToRemove} GB from ${selectedUsername}`);
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Error in Remove Gigabytes:', error.message);
-        toast.error('Failed to remove gigabytes.');
-      }
+      console.error('Error in Remove Gigabytes:', error);
+      toast.error('Failed to remove gigabytes.');
     } finally {
       setLoading(false);
     }
   };
+  
 
   const renderContent = () => {
     if (!selectedPlan) {
@@ -163,49 +190,54 @@ const SubUsersManagementPage: React.FC = () => {
     switch (activeTab) {
       case 'Create':
         return (
-          <div className="card p-4 shadow-sm">
-            <h5>Create User</h5>
-            <div>
-              <label>Customer Name</label>
+          <div className={`${styles.card} ${styles.createUser}`}>
+            <h5 className={styles.cardTitle}>Create User</h5>
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Customer Name</label>
               <input
                 type="text"
-                className="form-control mb-3"
+                className={styles.input}
                 placeholder="Enter customer name"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
               />
-              <label>Proxy Username</label>
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Proxy Username</label>
               <input
                 type="text"
-                className="form-control mb-3"
+                className={styles.input}
                 placeholder="Enter proxy username"
                 value={proxyUsername}
                 onChange={(e) => setProxyUsername(e.target.value)}
               />
-              <label>Proxy Password</label>
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Proxy Password</label>
               <input
                 type="password"
-                className="form-control mb-3"
+                className={styles.input}
                 placeholder="Enter proxy password"
                 value={proxyPassword}
                 onChange={(e) => setProxyPassword(e.target.value)}
               />
-              <div className="d-flex justify-content-between">
-                <button className="btn btn-primary mt-2" onClick={handleGenerateRandom}>
-                  Generate
-                </button>
-                <button className="btn btn-primary mt-2" onClick={handleCreateUser} disabled={loading}>
-                  Save
-                </button>
-              </div>
+            </div>
+            <div className={styles.buttons}>
+              <button className={styles.generateButton} onClick={handleGenerateRandom}>
+                Generate
+              </button>
+              <button className={styles.saveButton} onClick={handleCreateUser} disabled={loading}>
+                Save
+              </button>
             </div>
           </div>
         );
+      
+
       case 'Delete':
         return (
-          <div className="card p-4 shadow-sm">
-            <h5>Delete User</h5>
-            <table className="table table-striped">
+          <div className={styles.card}>
+            <table className={styles.table}>
               <thead>
                 <tr>
                   <th>ID</th>
@@ -216,21 +248,23 @@ const SubUsersManagementPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {usernames.length > 0 ? (
-                  usernames.map((user) => (
-                    <tr key={user.id}>
-                      <td>{user.id}</td>
-                      <td>{user.name}</td>
-                      <td>{user.bandwidth}</td>
-                      <td>{user.bandwidthLeft}</td>
-                      <td>
-                        <button className="btn btn-danger" onClick={() => handleDeleteUser(user.id)}>
-                          Delete
-                        </button>
+                {usernames.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.bandwidth}</td>
+                    <td>{user.bandwidthLeft}</td>
+                    <td>
+                      <button
+                        className={styles.sendButtonremove}
+                        onClick={() => handleDeleteUser(user.id)}
+                      >
+                        Delete
+                      </button>
                       </td>
                     </tr>
-                  ))
-                ) : (
+                  ))}
+                {usernames.length === 0 && (
                   <tr>
                     <td colSpan={5} className="text-center">
                       No users available.
@@ -241,49 +275,107 @@ const SubUsersManagementPage: React.FC = () => {
             </table>
           </div>
         );
-      case 'Manage':
-        return (
-          <div className="card p-4 shadow-sm">
-            <h5>Manage User</h5>
-            <div>
-              <label>Select Username</label>
-              <select
-                className="form-control mb-3"
-                value={selectedUsername}
-                onChange={(e) => setSelectedUsername(e.target.value)}
-              >
-                <option value="">Select a user</option>
-                {usernames.map((user) => (
-                  <option key={user.id} value={user.name}>
-                    {user.name}
-                  </option>
-                ))}
-              </select>
-              <label>GB to Add</label>
-              <input
-                type="number"
-                className="form-control mb-3"
-                placeholder="Enter GB to add"
-                value={gbToAdd}
-                onChange={(e) => setGbToAdd(Number(e.target.value))}
-              />
-              <label>GB to Remove</label>
-              <input
-                type="number"
-                className="form-control mb-3"
-                placeholder="Enter GB to remove"
-                value={gbToRemove}
-                onChange={(e) => setGbToRemove(Number(e.target.value))}
-              />
-              <button className="btn btn-primary" onClick={handleAddGigabytes} disabled={loading}>
-                {loading ? 'Adding...' : 'Add Gigabytes'}
-              </button>
-              <button className="btn btn-danger ml-3" onClick={handleRemoveGigabytes} disabled={loading}>
-                {loading ? 'Removing...' : 'Remove Gigabytes'}
-              </button>
+
+        case 'Manage':
+          return (
+            <div className={styles.manageUserContainer}>
+              <h5 className={styles.cardTitle}>Manage User</h5>
+              <div className={styles.manageUserContent}>
+              <div className={styles.circularProgress}>
+  <div className={styles.circle}>
+    {`${usernames.find((user) => user.name === selectedUsername)?.bandwidth || 0} GB / ${
+      selectedPlan ? 'Total GB' : 0
+    }`}
+  </div>
+</div>
+
+                <div className={styles.manageUserActions}>
+                  <div>
+                    <label>Select Sub-User</label>
+                    <select
+                      className={styles.input}
+                      value={selectedUsername}
+                      onChange={(e) => setSelectedUsername(e.target.value)}
+                    >
+                      <option value="">Sub - User list</option>
+                      {usernames.map((user) => (
+                        <option key={user.id} value={user.name}>
+                          {user.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>GB Add</label>
+                    <input
+                      type="number"
+                      className={styles.input}
+                      placeholder="Enter GB to add"
+                      value={gbToAdd}
+                      onChange={(e) => setGbToAdd(Number(e.target.value))}
+                    />
+                    <button
+                      className={styles.sendButtonadd}
+                      onClick={handleAddGigabytes} disabled={loading}>
+                      {loading ? 'Adding...' : 'Add Gigabytes'}
+                    </button>
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>GB Remove</label>
+                    <input
+                      type="number"
+                      className={styles.input}
+                      placeholder="Enter GB to remove"
+                      value={gbToRemove}
+                      onChange={(e) => setGbToRemove(Number(e.target.value))}
+                    />
+                    <button
+  className={styles.sendButtonremove}
+  onClick={handleRemoveGigabytes}
+  disabled={gbToRemove <= 0 || usernames.find((user) => user.name === selectedUsername)?.bandwidth === 0}
+  title={
+    usernames.find((user) => user.name === selectedUsername)?.bandwidth === 0
+      ? 'Cannot remove bandwidth: No bandwidth available.'
+      : ''
+  }
+>
+  {loading ? 'Removing...' : 'Remove Gigabytes'}
+</button>
+
+                  </div>
+                  <div className={styles.otherSettings}>
+                    <a href="#" className={styles.otherSettingsLink}>
+                      <span>Other Settings</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Proxy Username</th>
+                    <th>Bandwidth</th>
+                    <th>Bandwidth Left</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {usernames.map((user) => (
+                    <tr key={user.id}>
+                      <td>{user.name}</td>
+                      <td>{user.bandwidth} GB</td>
+                      <td>{user.bandwidthLeft}</td>
+                      <td>
+                        <span className={styles.disableStatus}>Disable</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </div>
-        );
+          );
+        
+
       default:
         return null;
     }
@@ -291,49 +383,45 @@ const SubUsersManagementPage: React.FC = () => {
 
   return (
     <DashboardLayout>
-      <div className="container">
-        <div className="header mb-4">
+      <div className={styles.container}>
+        <div className={styles.header}>
           <h5>Sub-users management</h5>
-          <p>Empower your team efficiency with seamless sub-user management.</p>
+          <p>Empower your team's efficiency with seamless sub-user management.</p>
         </div>
-        <div className="card p-4 shadow-sm">
-          <div className="mb-3">
-            <select
-              className="form-select"
-              onChange={(e) => setSelectedPlan(e.target.value)}
+        <div className={styles.card}>
+          <select
+            className={styles.select}
+            onChange={(e) => setSelectedPlan(e.target.value)}
+          >
+            <option value="">Select a plan</option>
+            {plans.map((plan) => (
+              <option key={plan.id} value={plan.id}>
+                {plan.name}
+              </option>
+            ))}
+          </select>
+          <div className={styles.tabs}>
+            <button
+              className={`${styles.tabButton} ${activeTab === 'Create' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Create')}
             >
-              <option value="">Select a plan</option>
-              {plans.map((plan) => (
-                <option key={plan.id} value={plan.id}>
-                  {plan.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="accordion-container">
-            <div className="tabs">
-              <button
-                className={`btn ${activeTab === 'Create' ? 'active' : ''}`}
-                onClick={() => setActiveTab('Create')}
-              >
-                Create User
-              </button>
-              <button
-                className={`btn ${activeTab === 'Delete' ? 'active' : ''}`}
-                onClick={() => setActiveTab('Delete')}
-              >
-                Delete User
-              </button>
-              <button
-                className={`btn ${activeTab === 'Manage' ? 'active' : ''}`}
-                onClick={() => setActiveTab('Manage')}
-              >
-                Manage User
-              </button>
-            </div>
+              Create User
+            </button>
+            <button
+              className={`${styles.tabButton} ${activeTab === 'Delete' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Delete')}
+            >
+              Delete User
+            </button>
+            <button
+              className={`${styles.tabButton} ${activeTab === 'Manage' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Manage')}
+            >
+              Manage User
+            </button>
           </div>
         </div>
-        <div className="mt-4">{renderContent()}</div>
+        <div className={styles.cardContent}>{renderContent()}</div>
       </div>
     </DashboardLayout>
   );

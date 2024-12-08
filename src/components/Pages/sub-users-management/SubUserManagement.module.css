@@ -1,0 +1,291 @@
+.container {
+    padding: 20px;
+    background-color: #f9fafe;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .header h5 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .header p {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .card {
+    /* background-color: #fff; */
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .tabButton {
+    flex: 1;
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+    padding: 10px;
+    text-align: center;
+    border-radius: 6px;
+  }
+  
+  .tabButton.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .cardContent {
+    margin-top: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .generateButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+  }
+  
+  .saveButton {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+  }
+  
+
+  .createUser {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .cardTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .formGroup {
+    margin-bottom: 20px;
+  }
+  
+  .formLabel {
+    display: block;
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 8px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+  }
+
+  .input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .generateButton,
+  .saveButton {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .generateButton {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .saveButton {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .generateButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .saveButton:hover {
+    background-color: #218838;
+  }
+
+  .manageUserContainer {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cardTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .manageUserContent {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .circularProgress {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .circle {
+    width: 120px;
+    height: 120px;
+    border: 10px solid #007bff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+    background-color: #eef6ff;
+  }
+  
+  .manageUserActions {
+    flex: 2;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .sendButtonadd {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .sendButtonremove {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sendButton:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  .sendButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .otherSettings {
+    margin-top: 10px;
+  }
+  
+  .otherSettingsLink {
+    color: #007bff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .otherSettingsLink:hover {
+    color: #0056b3;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+    color: #6c757d;
+  }
+  
+  .disableStatus {
+    color: #dc3545;
+    font-weight: bold;
+  }
+  
