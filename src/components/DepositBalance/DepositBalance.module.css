@@ -1,0 +1,156 @@
+.container {
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+    color: #6c757d;
+  }
+  
+  .contactButton {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  
+  .content {
+    display: flex;
+    gap: 0px;
+  }
+
+  .left,
+  .right {  
+    gap: 20px;
+  }
+  
+
+  .topCard,
+  .bottomCard {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 600px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .stripeVat {
+    font-size: 12px;
+    color: #6c757d;
+  }
+  
+  .addCryptoButton {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #79D08E;
+  }
+
+  .addStripeButton {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #9995FE;
+  }
+  
+  .billingInfo {
+    background-color: #f4cb99;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .link {
+    color: #007bff;
+  }
+  
+  .cryptoList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .cryptoList li {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .footerLogos {
+    display: flex;
+    justify-content: left;
+    gap: 20px;
+  }
+  
+  .logo {
+    height: 20px;
+  }
+  
+  .right {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    max-height: 550px;
+    margin-left: 100;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    width: 1200px;
+    text-align: center;
+  }
+
+  .benefitsTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .benefitsDescription {
+    font-size: 16px;
+    color: #6c757d;
+  }
+  
+  .illustration {
+    max-width: 50%;
+  }
+  
+  .benefits {
+    text-align: left;
+  }
+  
+  .benefitsList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .benefitsList li {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .benefitsList li::before {
+    content: '✔';
+    color: #007bff;
+    margin-right: 10px;
+  }
+  
