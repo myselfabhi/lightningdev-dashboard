@@ -1012,7 +1012,7 @@
 
 .sidebar-wrapper {
 	width: 300px;
-	/* height: 100vh; */
+	/* height: 50%; */
 	overflow-y: scroll;
 	overflow-y: auto;
 	background-color: #fff;

@@ -1,30 +1,31 @@
 import React from 'react';
+import styles from './Footer.module.css';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="footer mt-4">
-      <div className="text-center">
+    <footer className={styles.footer}>
+      <div className={styles.textCenter}>
         <p>© 2024 Lightning Proxies. All rights reserved.</p>
-        <div>
-          <a href="#" className="footer-links">
+        {/* <div>
+          <a href="#" className={styles.footerLinks}>
             Terms of Service
           </a>{' '}
           |{' '}
-          <a href="#" className="footer-links">
+          <a href="#" className={styles.footerLinks}>
             Privacy Policy
           </a>
-        </div>
-        <div className="social-icons mt-3">
-          <a href="#" aria-label="Facebook" className="social-icon">
+        </div> */}
+        {/* <div className={styles.socialIcons}>
+          <a href="#" aria-label="Facebook" className={styles.socialIcon}>
             <i className="fab fa-facebook"></i>
           </a>
-          <a href="#" aria-label="Twitter" className="social-icon">
+          <a href="#" aria-label="Twitter" className={styles.socialIcon}>
             <i className="fab fa-twitter"></i>
           </a>
-          <a href="#" aria-label="Instagram" className="social-icon">
+          <a href="#" aria-label="Instagram" className={styles.socialIcon}>
             <i className="fab fa-instagram"></i>
           </a>
-        </div>
+        </div> */}
       </div>
     </footer>
   );
