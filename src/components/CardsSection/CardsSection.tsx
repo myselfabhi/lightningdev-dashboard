@@ -42,7 +42,7 @@ const CardsSection: React.FC<CardsSectionProps> = ({
         <div>
           <h4 className={styles.welcomeTitle}>Welcome {username}</h4>
           <p className={styles.welcomeSubtitle}>
-            Welcome back, we're glad to have you.
+            Welcome back, were glad to have you.
           </p>
         </div>
         <button className={styles.readMoreBtn}>
